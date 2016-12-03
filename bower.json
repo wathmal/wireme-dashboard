@@ -1,0 +1,22 @@
+{
+  "name": "wireme-react",
+  "description": "",
+  "main": "webpack.config.js",
+  "authors": [
+    "Sasitha Sonnadara <sasithawathmal@gmail.com>"
+  ],
+  "license": "UNLICENSED",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "c3": "c3js-chart#^0.4.11"
+  }
+}
