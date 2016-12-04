@@ -1,0 +1,11 @@
+{
+  "apps" : [{
+    "script"      : "build/server.js",
+    "name": "wireme",
+    "watch"       : false,
+    "env": {
+      "NODE_ENV": "production",
+      "PORT": 80
+    }
+  }]
+}
