@@ -19,10 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 console.log("node env: "+ process.env.NODE_ENV);
 
-if(process.env.NODE_ENV == 'development') {
+if(process.env.NODE_ENV != 'production') {
     const compiler = webpack(config);
     app.use(webpackMiddleware(compiler));
-    app.use(webpackHotMiddleware(compiler));
+    app.use(webpackHotMiddleware(compiler));    
 }
 
 app.use('/api', Api );

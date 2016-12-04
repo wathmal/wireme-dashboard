@@ -1,6 +1,6 @@
 var path = require('path');
 var srcPath = path.join(__dirname, 'src');
-var buildPath = path.join(__dirname, 'build');
+var buildPath = path.join(__dirname, 'build', 'public');
 var webpack = require('webpack');
 
 module.exports = {
