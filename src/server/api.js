@@ -1,0 +1,161 @@
+/**
+ * Created by wathmal on 12/3/16.
+ */
+
+import express from 'express';
+import JWT from 'jsonwebtoken';
+import config from './config';
+import DBService from './services/DBService';
+
+const apiRouter = express.Router();
+
+/*
+ * authenticate endpoint
+ * body: {
+ * username: xxx
+ * pass: xxx
+ * }
+ * */
+apiRouter.post('/login', (req, res)=>{
+    if(req.body.username && req.body.pass){
+
+        // const hash= Bcrypt.hashSync(req.body.pass, config.saltRounds);
+        // console.log(hash);
+        
+        DBService.loginWithPass(req.body.username, req.body.pass).then(rep =>{
+            // success means user and pwd matches
+            // generate token and pass
+            const token= JWT.sign({username: req.body.username},config.secret, {
+                expiresIn: config.tokenExpiration
+            });
+            // send token
+            res.status(rep.code).json({token: token});
+        }, err=>{
+            res.status(err.code).json(err);
+        })
+    }
+    else{
+        res.status(400).json({message: 'bad input'});
+    }
+
+    
+});
+
+/*
+* register endpoint
+* body {
+* username:
+* }
+* */
+apiRouter.post('/register', (req, res)=>{
+    if(req.body.username && req.body.pass && req.body.name){
+
+        DBService.registerNewUser(req.body).then(rep => {
+            res.status(rep.code).json(rep);
+        }, err=>{
+            res.status(err.code).json(err);
+        });
+    }
+    else{
+        res.status(400).json({message: 'bad input'});
+    }
+});
+
+// validate jwt
+apiRouter.use((req, res, next) =>{
+
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        JWT.verify(token, config.secret, (err, decoded) => {
+            if (err) {
+
+                return res.status(401).json({code: 401, message: 'failed to authenticate token.'});
+            }
+            else {
+                // if everything is good, save to request for use in other routes
+                // this contains the username.
+                req.decoded = decoded;
+                next();
+            }
+
+        })
+    }
+    else{
+        return res.status(401).json({code: 401, message: 'failed to authenticate token.'});
+    }
+});
+
+apiRouter.get('/', (req, res)=>{
+    res.json({message: 'verified'});
+});
+
+
+apiRouter.route('/:username/widgets')
+    // get user widget details
+    .get((req, res) =>{
+        const user = req.params.username;
+        DBService.getWidgets(user).then(rep =>{
+            res.status(rep.code).json(rep);
+        }, err=>{
+            res.status(err.code).json(err);
+        })
+
+    })
+    // post user widget details
+    .post((req, res)=>{
+        const user = req.params.username;
+
+        let widgetAry= [];
+
+        const keyMap = {
+            "setWidgetName": "title",
+            "sendDataToWidget": "topic",
+            "receiveDataFromWidget": "topic"
+        };
+        if(req.body.widgets && req.body.widgets.length != 0){
+            req.body.widgets.forEach((widget)=>{
+                let newWidget={
+                    type: widget.title.replace(/([0-9])+/g, "")
+                };
+
+                // iterate inner array. skip 1st element
+                for(let innerAryIdx= 1; innerAryIdx < widget.data.length; innerAryIdx++){
+
+                    for(let key in keyMap){
+                        if(key == widget.data[innerAryIdx][0]){
+                            newWidget[keyMap[key]]= widget.data[innerAryIdx][1];
+                            // break innner loop
+                            break;
+                        }
+                    }
+                }
+
+
+                widgetAry.push(newWidget);
+
+            });
+
+            // send to DB
+            DBService.setWidgets(user, widgetAry).then(rep => {
+                res.status(rep.code).json(rep);
+            }, err=>{
+                res.status(err.code).json(err);
+            });
+
+        }
+        else{
+            console.log('no widgets');
+            res.status(400).json({message: 'no widgets provided'});
+        }
+
+
+        
+        
+
+
+        // delete old records
+        // add new widgets
+    });
+
+
+export default apiRouter;

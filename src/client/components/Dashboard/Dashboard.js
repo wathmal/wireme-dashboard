@@ -36,31 +36,32 @@ class Dashboard extends React.Component{
         * [{name: "my temperature", topic: "temp1", type: "gauge"}]
         * */
 
+        // TODO: 'name' should be renemed as 'title'
         const userDashboard= [
             {
-                name: "study room temperature",
-                topic: "study1",
+                title: "study room temperature",
+                topic: "temp",
                 type: "gauge"
             },
             {
-                name: "outdoor temp",
+                title: "outdoor temp",
                 topic: "out1",
                 type: "line"
             },
             {
-                name: "living room light",
-                topic: "lbulb",
+                title: "living room light",
+                topic: "dimmer1",
                 type: "knob"
             },
             {
-                name: "corridor bulb",
+                title: "corridor bulb",
                 topic: "cbulb",
                 type: "switch"
             }
         ];
 
         const user={
-            username: "wathmal",
+            username: "test",
             name: "sasitha wathmal",
             widgets: userDashboard
         };

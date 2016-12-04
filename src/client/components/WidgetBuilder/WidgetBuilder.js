@@ -26,7 +26,7 @@ class WidgetBuilder extends React.Component{
 
             for (let c = 0; c < this.props.widgets.length; c++) {
                 Widgets.push(<div className="col-md-4 col-xs-12" style={{marginBottom: '10px'}}>
-                    <WidgetCard title={this.props.widgets[c].name} mqttTopic={this.props.widgets[c].topic} type={this.props.widgets[c].type}/>
+                    <WidgetCard title={this.props.widgets[c].title} mqttTopic={this.props.widgets[c].topic} type={this.props.widgets[c].type}/>
 
                 </div>)
             }

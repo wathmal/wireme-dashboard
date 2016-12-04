@@ -84,8 +84,8 @@ jspm_packages
 .node_repl_history
 
 /build/public/css/
-/build/bundle.js
-/build/server.js.map
-/build/server.js
-/build/bundle.js.map
+/build/*.js
+/build/*.js.map
+
 /build/public/bower_components/
+/build/services/

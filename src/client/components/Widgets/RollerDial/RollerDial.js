@@ -13,7 +13,7 @@ class RollerDial extends React.Component {
 
         this.handleChange= this.handleChange.bind(this);
         this.state={
-            value: 25
+            value: 10
         }
 
     }
@@ -24,16 +24,20 @@ class RollerDial extends React.Component {
 
     handleChange(newValue){
         // toggle state
-        this.setState({value: newValue});
+        // console.log(newValue);
 
-        MQTTService.getClient().publish(RM.getUsername()+"/" +this.props.mqttTopic, JSON.stringify({value: newValue}), (err)=>{
-            if(err){
-                console.log(err)
-            }
-            else{
-                console.log('action published');
-            }
-        })
+        // check if a new value
+        if(newValue != this.state.value) {
+            this.setState({value: newValue});
+            MQTTService.getClient().publish(RM.getUsername() + "/" + this.props.mqttTopic, JSON.stringify({value: newValue}), (err)=> {
+                if (err) {
+                    console.log(err)
+                }
+                else {
+                    console.log('action published');
+                }
+            })
+        }
 
     }
 
@@ -50,6 +54,7 @@ class RollerDial extends React.Component {
                     value={this.state.value}
                     onChange={this.handleChange}
                     width={180}
+                    step={10}
                 />
 
             </div>
