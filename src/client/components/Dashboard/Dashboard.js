@@ -36,39 +36,42 @@ class Dashboard extends React.Component{
         * [{name: "my temperature", topic: "temp1", type: "gauge"}]
         * */
 
-        // TODO: 'name' should be renemed as 'title'
-        const userDashboard= [
-            {
-                title: "study room temperature",
-                topic: "temp",
-                type: "gauge"
-            },
-            {
-                title: "outdoor temp",
-                topic: "out1",
-                type: "line"
-            },
-            {
-                title: "living room light",
-                topic: "dimmer1",
-                type: "knob"
-            },
-            {
-                title: "corridor bulb",
-                topic: "cbulb",
-                type: "switch"
-            }
-        ];
+        let client= MQTTService.getClient();
 
-        const user={
-            username: "test",
-            name: "sasitha wathmal",
-            widgets: userDashboard
-        };
+        AuthService.checkIfLoggedIn().then(r =>{
 
-        // TODO: this will done inside RM, after login
-        RM.setUser(user);
-        this.setState({widgets: userDashboard});
+            // if logged in get user widgets
+            AuthService.getUserWidgets().then(res=>{
+                // set new state
+                this.setState({widgets: res.data});
+
+                // generate MQTT subscriber array
+                let topicArray= [];
+                for (let n in this.state.widgets){
+                    topicArray.push(RM.getUsername()+'/'+ this.state.widgets[n].topic);
+                }
+
+                // subscribe to all topics
+                client.subscribe(topicArray, (err, granted)=>{
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        console.log('subscribed to MQTT topics');
+                    }
+                });
+            }, err=>{
+
+                //console.log(err);
+            });
+
+        }, e=>{
+            // not logged in or token not verified
+            AuthService.logout();
+        });
+
+
+
 
         /*
         * after receiving user widget details
@@ -77,26 +80,6 @@ class Dashboard extends React.Component{
         * 3. in MQTT receive function, switch and emit received payloads tru MainEmitter by mqttTopic
         * 4. in each widget listen to mqttTopic tru MainEmitter, and do as required.
         * */
-
-        let client= MQTTService.getClient();
-        client.on('connect', ()=>{
-            console.log('mqtt connected over WS');
-            let topicArray= [];
-            for (let n in userDashboard){
-                topicArray.push(RM.getUsername()+'/'+ userDashboard[n].topic);
-            }
-
-            // subscribe to all topics
-            client.subscribe(topicArray, (err, granted)=>{
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    console.log(granted);
-                }
-            })
-        });
-
         client.on('message', (topic, message)=>{
             let mqttTopic= topic.substring(RM.getUsername().length+1);
 

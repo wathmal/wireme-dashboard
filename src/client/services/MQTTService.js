@@ -11,6 +11,9 @@ class MQTTService{
             client = MQTT.connect('ws://wireme.projects.mrt.ac.lk', {port: 8883, username:'test', password:'test123'});
             // client = MQTT.connect('mqtt://wireme.projects.mrt.ac.lk', {port: 8000});
             // client = MQTT.connect('mqtt://test.mosquitto.org');
+            client.on('connect', ()=>{
+                console.log('mqtt connected over WS');
+            });
 
             client.on('error', ()=>{
                 console.log('error');

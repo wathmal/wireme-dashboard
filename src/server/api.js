@@ -21,7 +21,7 @@ apiRouter.post('/login', (req, res)=>{
 
         // const hash= Bcrypt.hashSync(req.body.pass, config.saltRounds);
         // console.log(hash);
-        
+
         DBService.loginWithPass(req.body.username, req.body.pass).then(rep =>{
             // success means user and pwd matches
             // generate token and pass
@@ -29,7 +29,7 @@ apiRouter.post('/login', (req, res)=>{
                 expiresIn: config.tokenExpiration
             });
             // send token
-            res.status(rep.code).json({token: token});
+            res.status(rep.code).json({code: 200, token: token});
         }, err=>{
             res.status(err.code).json(err);
         })
@@ -38,7 +38,7 @@ apiRouter.post('/login', (req, res)=>{
         res.status(400).json({message: 'bad input'});
     }
 
-    
+
 });
 
 /*
@@ -86,14 +86,14 @@ apiRouter.use((req, res, next) =>{
 });
 
 apiRouter.get('/', (req, res)=>{
-    res.json({message: 'verified'});
+    res.json({code: 200, message: 'verified'});
 });
 
 
-apiRouter.route('/:username/widgets')
+apiRouter.route('/widgets')
     // get user widget details
     .get((req, res) =>{
-        const user = req.params.username;
+        const user = req.decoded.username;
         DBService.getWidgets(user).then(rep =>{
             res.status(rep.code).json(rep);
         }, err=>{
@@ -103,7 +103,7 @@ apiRouter.route('/:username/widgets')
     })
     // post user widget details
     .post((req, res)=>{
-        const user = req.params.username;
+        const user = req.decoded.username;
 
         let widgetAry= [];
 
@@ -135,6 +135,7 @@ apiRouter.route('/:username/widgets')
 
             });
 
+            // TODO: check widgetAry is a valid widget array
             // send to DB
             DBService.setWidgets(user, widgetAry).then(rep => {
                 res.status(rep.code).json(rep);

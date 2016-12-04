@@ -16,7 +16,8 @@ class Login extends React.Component {
         this.onClickLogin= this.onClickLogin.bind(this);
         this.state={
             username: '',
-            pwd: ''
+            pwd: '',
+            error: ''
         }
 
     }
@@ -27,7 +28,15 @@ class Login extends React.Component {
     onClickLogin(){
         console.log('login');
         // verify inputs
-        AuthService.login(this.state.username, this.state.pwd);
+        AuthService.login(this.state.username, this.state.pwd).then(res =>{
+            console.log(res);
+            this.setState({error: ""});
+            // redirect on success
+            window.location = '/';
+        }, err=>{
+            console.log(err);
+            this.setState({error: "something went wrong. pls try again"});
+        })
     }
 
     render() {
@@ -40,8 +49,8 @@ class Login extends React.Component {
                             <img src="http://localhost:3000/images/wireme_logo.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
                         </div>
                         <section>
-                            <Input type='email' label='username' icon='perm_identity' value={this.state.username} onChange={this.handleChange.bind(this, 'username')} />
-                            <Input type='password' label='password' icon='vpn_key' value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')} />
+                            <Input type='text' error={this.state.error} label='username' icon='perm_identity' value={this.state.username} onChange={this.handleChange.bind(this, 'username')} />
+                            <Input type='password' error={this.state.error} label='password' icon='vpn_key' value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')} />
                         </section>
                     </CardText>
                     <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>

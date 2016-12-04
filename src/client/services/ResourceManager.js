@@ -30,7 +30,11 @@ class ResourceManager{
     }
 
     getWidgets(){
-        return store.get('user').widgets;
+        return store.get('widgets');
+    }
+
+    setWidgets(widgets){
+        store.set('widgets', widgets);
     }
 
 }

@@ -105,10 +105,10 @@ class DBService{
                         }
 
                         // exec
-                        conn.execute("INSERT INTO user_widget (user_id, widget_id, topic,title) values "+ subQuery, preparedParams,
+                        conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values "+ subQuery, preparedParams,
                             (err, results, fields)=>{
                                 if(err){
-                                    reject(this.responseGenerator(500, 'database error'));
+                                    reject(this.responseGenerator(500, 'internal error'));
                                 }
                                 else{
                                     fulfill(this.responseGenerator(201, 'added'));

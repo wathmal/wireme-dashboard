@@ -4,6 +4,7 @@
 
 import RM from './ResourceManager';
 import store from 'store';
+import Promise from 'promise';
 
 class AuthService{
     constructor(){
@@ -18,14 +19,75 @@ class AuthService{
         return store.get('token');
     }
 
-    login(user, pass){
-        // login
-        //this.setToken()
+    login(username, pass){
+        // jquery ajax POST request
+        const user= {
+            username: username,
+            pass: pass
+        };
+
+        return new Promise((fulfill, reject) =>{
+            $.ajax({
+                method: 'POST',
+                url: '/api/login',
+                data: JSON.stringify(user),
+                dataType: 'json',
+                contentType: "application/json",
+                success: (data) => {
+                    this.setToken(data.token);
+                    // get complete user object from login endpoint
+                    RM.setUser({username: username});
+                    fulfill(data);
+                },
+                error: (xhr, status, err) => {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    checkIfLoggedIn(){
+        return new Promise((fulfill, reject) =>{
+            if(this.getToken()){
+                $.ajax({
+                    method: 'GET',
+                    url: '/api',
+                    headers: {"x-access-token": this.getToken()},
+                    success: (data) => {
+                        fulfill(true);
+                    },
+                    error: (xhr, status, err) => {
+                        reject(false);
+                    }
+                });
+            }
+            else{
+                reject(false);
+            }
+        });
+
+    }
+
+    getUserWidgets(){
+        return new Promise((fulfill, reject) =>{
+            $.ajax({
+                method: 'GET',
+                url: '/api/widgets',
+                headers: {"x-access-token": this.getToken()},
+                success: (data) => {
+                    RM.setWidgets(data.data);
+                    fulfill(data);
+                },
+                error: (xhr, status, err) => {
+                    reject(err);
+                }
+            });
+        });
     }
 
     logout(){
-        // logout logic
-        console.log('logging out');
+        store.clear();
+        window.location = '/login';
     }
     
 }
