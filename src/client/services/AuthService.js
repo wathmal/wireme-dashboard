@@ -46,6 +46,31 @@ class AuthService{
         });
     }
 
+    register(name, username, pass){
+        // jquery ajax POST request
+        const user= {
+            name: name,
+            username: username,
+            pass: pass
+        };
+
+        return new Promise((fulfill, reject) =>{
+            $.ajax({
+                method: 'POST',
+                url: '/api/register',
+                data: JSON.stringify(user),
+                dataType: 'json',
+                contentType: "application/json",
+                success: (data) => {
+                    fulfill(data);
+                },
+                error: (xhr, status, err) => {
+                    reject(err);
+                }
+            });
+        });
+    }
+
     checkIfLoggedIn(){
         return new Promise((fulfill, reject) =>{
             if(this.getToken()){
