@@ -65,7 +65,7 @@ class AuthService{
                     fulfill(data);
                 },
                 error: (xhr, status, err) => {
-                    reject(err);
+                    reject(xhr.responseJSON);
                 }
             });
         });
