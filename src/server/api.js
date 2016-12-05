@@ -106,6 +106,7 @@ apiRouter.route('/widgets')
         const user = req.decoded.username;
 
         let widgetAry= [];
+        let badInput = false;
 
         const keyMap = {
             "setWidgetName": "title",
@@ -114,6 +115,12 @@ apiRouter.route('/widgets')
         };
         if(req.body.widgets && req.body.widgets.length != 0){
             req.body.widgets.forEach((widget)=>{
+                // check if inputs are valid
+                if(widget.data.length < 3){
+                    badInput = true;
+                    res.status(400).json({message: 'bad input'});
+                }
+
                 let newWidget={
                     type: widget.title.replace(/([0-9])+/g, "")
                 };
@@ -136,12 +143,14 @@ apiRouter.route('/widgets')
             });
 
             // TODO: check widgetAry is a valid widget array
-            // send to DB
-            DBService.setWidgets(user, widgetAry).then(rep => {
-                res.status(rep.code).json(rep);
-            }, err=>{
-                res.status(err.code).json(err);
-            });
+            // if not bad input 
+            if(!badInput){
+                DBService.setWidgets(user, widgetAry).then(rep => {
+                    res.status(rep.code).json(rep);
+                }, err=>{
+                    res.status(err.code).json(err);
+                });
+            }
 
         }
         else{

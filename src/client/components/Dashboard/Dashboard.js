@@ -42,28 +42,31 @@ class Dashboard extends React.Component{
 
             // if logged in get user widgets
             AuthService.getUserWidgets().then(res=>{
-                // set new state
-                this.setState({widgets: res.data});
+                // set new state only if there are widgets
+                if(res.data.length > 0) {
+                    this.setState({widgets: res.data});
 
-                // generate MQTT subscriber array
-                let topicArray= [];
-                for (let n in this.state.widgets){
-                    topicArray.push(RM.getUsername()+'/'+ this.state.widgets[n].topic);
+                    // generate MQTT subscriber array
+                    let topicArray = [];
+                    for (let n in this.state.widgets) {
+                        topicArray.push(RM.getUsername() + '/' + this.state.widgets[n].topic);
+                    }
+
+                    // subscribe to all topics
+                    client.subscribe(topicArray, (err, granted)=> {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            console.log('subscribed to MQTT topics');
+                        }
+                    });
                 }
-
-                // subscribe to all topics
-                client.subscribe(topicArray, (err, granted)=>{
-                    if(err){
-                        console.log(err);
-                    }
-                    else{
-                        console.log('subscribed to MQTT topics');
-                    }
-                });
             }, err=>{
 
                 //console.log(err);
             });
+
 
         }, e=>{
             // not logged in or token not verified
