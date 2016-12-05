@@ -27,7 +27,7 @@ class DBService{
             conn.execute('SELECT * FROM user WHERE username= ? LIMIT 1', [user],
                 (err, results, fields)=>{
                     if(err){
-                        reject(this.responseGenerator(500, 'database error'));
+                        reject(this.responseGenerator(500, 'database error', null, err.code));
                     }
                     else{
                         if(results.length ==0){
@@ -65,7 +65,8 @@ class DBService{
                     conn.execute('INSERT INTO user (username, hash, name) VALUES ( ? , ? , ? )', [userObj.username, hash, userObj.name],
                         (err, results, fields)=>{
                             if(err){
-                                reject(this.responseGenerator(500, 'database error'));
+
+                                reject(this.responseGenerator(500, 'database error', null, err.code));
                             }
                             else{
                                 fulfill(this.responseGenerator(201));
@@ -108,7 +109,7 @@ class DBService{
                         conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values "+ subQuery, preparedParams,
                             (err, results, fields)=>{
                                 if(err){
-                                    reject(this.responseGenerator(500, 'internal error'));
+                                    reject(this.responseGenerator(500, 'database error', null, err.code));
                                 }
                                 else{
                                     fulfill(this.responseGenerator(201, 'added'));
@@ -125,7 +126,7 @@ class DBService{
             conn.execute('SELECT type, title, topic FROM user_widget JOIN widget WHERE user_widget.widget_id = widget.id AND user_id= (SELECT id FROM user WHERE username= ? LIMIT 1)', [username],
                 (err, results, fields)=>{
                     if(err){
-                        reject(this.responseGenerator(500, 'database error'));
+                        reject(this.responseGenerator(500, 'database error', null, err.code));
                     }
                     else{
                         fulfill(this.responseGenerator(200, null, results));
@@ -136,7 +137,7 @@ class DBService{
     }
 
     // function to generate response to be sent as API resp.
-    responseGenerator(code, message, data){
+    responseGenerator(code, message, data, error){
         let res={
             code: code
         };
@@ -146,6 +147,9 @@ class DBService{
         }
         if(data){
             res.data= data;
+        }
+        if(error){
+            res.error= error;
         }
         
         return res;
