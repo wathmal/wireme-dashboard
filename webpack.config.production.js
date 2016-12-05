@@ -6,7 +6,7 @@ var webpack = require('webpack');
 module.exports = {
     context: srcPath,
     entry: path.join(srcPath, 'client', 'client.js'),
-    devtool: 'source-map',
+    devtool: false,
     output: {
         path: buildPath,
         filename: "bundle.js"
