@@ -26,10 +26,10 @@ pass: test123
 * you should have installed and configured `PM2` to auto start.
 * bind nodejs to run on port 80.
 
-follow below steps 🤣
+follow below steps
 ```
 # keep environment on development mode when running these
-npm rum build-server
+npm run build-server
 webpack -p --config webpack.config.production.js --progress
 pm2 start pm2_process.json
 ```
