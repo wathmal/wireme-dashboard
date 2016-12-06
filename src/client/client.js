@@ -9,7 +9,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import App from './App';
 import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
-
+import Register from './components/Register/Register';
 
 const app = document.getElementById('app');
 
@@ -18,7 +18,8 @@ ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={Dashboard}/>
-            <Route path="login" component={Login} />
+            <Route path="login" component={Login}/>
+            <Route path="register" component={Register}/>
         </Route>
     </Router>, app);
 
