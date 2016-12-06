@@ -4,7 +4,7 @@
 
 import React, {PropTypes} from 'react';
 import Input from 'react-toolbox/lib/input';
-import { Card, CardMedia, CardText, CardActions } from 'react-toolbox/lib/card';
+import { Card, CardText, CardActions } from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 
 import AuthService from './../../services/AuthService';

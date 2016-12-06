@@ -4,7 +4,7 @@
 
 import React, {PropTypes} from 'react';
 import Input from 'react-toolbox/lib/input';
-import { Card, CardMedia, CardText, CardActions } from 'react-toolbox/lib/card';
+import { Card, CardText, CardActions } from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 
 import AuthService from './../../services/AuthService';
@@ -80,7 +80,7 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div className="col-md-6 col-md-offset-3 col-xs-12" style={{paddingTop: 20}}>
+            <div className="col-md-4 col-md-offset-4 col-xs-12" style={{paddingTop: 20}}>
 
                 <Card style={{width: '100%'}}>
                     <CardText>
@@ -90,13 +90,13 @@ class Register extends React.Component {
                                  style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
                         </div>
                         <section>
-                            <Input type='text' error={this.state.error+this.state.blank_name} label='name' icon='account_circle'
+                            <Input type='text' error={this.state.error+this.state.blank_name} label='name'
                                    value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>
-                            <Input type='text' error={this.state.error+this.state.blank_user} label='username' icon='perm_identity'
+                            <Input type='text' error={this.state.error+this.state.blank_user} label='username'
                                    value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
-                            <Input type='password' error={this.state.miss_match_pwd+this.state.error+this.state.blank_pass} label='password' icon='vpn_key'
+                            <Input type='password' error={this.state.miss_match_pwd+this.state.error+this.state.blank_pass} label='password'
                                    value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')}/>
-                            <Input type='password' error={this.state.miss_match_pwd+this.state.error} label='confirm password' icon='vpn_key'
+                            <Input type='password' error={this.state.miss_match_pwd+this.state.error} label='confirm password'
                                    value={this.state.conf_pwd} onChange={this.handleChange.bind(this, 'conf_pwd')}/>
                         </section>
                     </CardText>
