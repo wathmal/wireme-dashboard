@@ -112,7 +112,7 @@ class DBService{
                                     reject(this.responseGenerator(500, 'database error', null, err.code));
                                 }
                                 else{
-                                    fulfill(this.responseGenerator(201, 'added'));
+                                    fulfill(this.responseGenerator(200, 'added'));
                                 }
                             });
                     }
