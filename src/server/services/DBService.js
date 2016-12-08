@@ -27,6 +27,7 @@ class DBService{
             conn.execute('SELECT * FROM user WHERE username= ? LIMIT 1', [user],
                 (err, results, fields)=>{
                     if(err){
+                        console.log(err);
                         reject(this.responseGenerator(500, 'database error', null, err.code));
                     }
                     else{
@@ -65,7 +66,7 @@ class DBService{
                     conn.execute('INSERT INTO user (username, hash, name) VALUES ( ? , ? , ? )', [userObj.username, hash, userObj.name],
                         (err, results, fields)=>{
                             if(err){
-
+                                console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
                             }
                             else{
@@ -109,12 +110,18 @@ class DBService{
                         conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values "+ subQuery, preparedParams,
                             (err, results, fields)=>{
                                 if(err){
+                                    console.log(err);
                                     reject(this.responseGenerator(500, 'database error', null, err.code));
                                 }
                                 else{
+                                    // changed status code from 201 to 200 due to ActionScript constraints
                                     fulfill(this.responseGenerator(200, 'added'));
                                 }
                             });
+                    }
+                    else{
+                        console.log(err);
+                        reject(this.responseGenerator(500, 'database error', null, err.code));
                     }
                 })
         })
@@ -126,6 +133,7 @@ class DBService{
             conn.execute('SELECT type, title, topic FROM user_widget JOIN widget WHERE user_widget.widget_id = widget.id AND user_id= (SELECT id FROM user WHERE username= ? LIMIT 1)', [username],
                 (err, results, fields)=>{
                     if(err){
+                        console.log(err);
                         reject(this.responseGenerator(500, 'database error', null, err.code));
                     }
                     else{
