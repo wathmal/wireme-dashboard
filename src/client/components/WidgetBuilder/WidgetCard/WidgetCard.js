@@ -8,6 +8,7 @@ import {Button, IconButton} from 'react-toolbox/lib/button';
 import Chip from 'react-toolbox/lib/chip';
 import Avatar from 'react-toolbox/lib/avatar';
 import RM from './../../../services/ResourceManager';
+import { TwitterPicker } from 'react-color';
 
 import Gauge from './../../Widgets/Gauge/Gauge';
 import LineGraph from './../../Widgets/LineGraph/LineGraph'
@@ -17,6 +18,15 @@ import RollerDial from './../../Widgets/RollerDial/RollerDial';
 
 class WidgetCard extends React.Component {
 
+    constructor(){
+        super();
+        this.handleColorPickerButton= this.handleColorPickerButton.bind(this);
+        this.handleClose= this.handleClose.bind(this);
+
+        this.state= {
+            displayColorPicker: false
+        }
+    }
     static propTypes = {
         // mqttTopic: React.PropTypes.string.isRequired
         title: React.PropTypes.string,
@@ -24,7 +34,35 @@ class WidgetCard extends React.Component {
         type: React.PropTypes.string
 
     };
+
+    handleColorPickerButton(){
+        this.setState({ displayColorPicker: !this.state.displayColorPicker });
+    }
+
+    handleClose(){
+        this.setState({ displayColorPicker: false });
+    }
+
     render(){
+        // styles for color picker
+        const popover = {
+            position: 'absolute',
+            zIndex: '2'
+        };
+        const cover = {
+            position: 'fixed',
+            top: '0px',
+            right: '0px',
+            bottom: '0px',
+            left: '0px'
+        };
+
+        // icon button style
+        const picker={
+            marginRight: 0,
+            marginLeft: 'auto'
+        };
+
         // choose corresponding widget
         let Widget;
         switch (this.props.type){
@@ -52,6 +90,16 @@ class WidgetCard extends React.Component {
                 <CardText>
                     {Widget}
                 </CardText>
+                <CardActions>
+                    <IconButton icon='settings' onClick={this.handleColorPickerButton} accent/>
+                    { this.state.displayColorPicker ?
+                        <div style={ popover }>
+                            <div style={ cover } onClick={ this.handleClose }/>
+                            <TwitterPicker triangle="hide" />
+                        </div>
+                        : null
+                    }
+                </CardActions>
             </Card>
         );
     }
