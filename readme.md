@@ -7,10 +7,11 @@ sudo npm install -g babel-cli webpack babel-core bower
 ```
 
 running
-```
+```bash
 npm install
 bower install
 npm start
+# run this on another terminal tab
 webpack --watch --progress
 ```
 run `webpack` command in another terminal in order to watch for changes.
