@@ -6,7 +6,7 @@ import React, {PropTypes} from 'react';
 import Switch from 'react-toolbox/lib/switch';
 import MQTTService from './../../../services/MQTTService';
 import RM from './../../../services/ResourceManager';
-import style from './styles.scss';
+import style from './ToggleSwitch.scss';
 
 class ToggleSwitch extends React.Component {
     constructor(props){
@@ -20,7 +20,8 @@ class ToggleSwitch extends React.Component {
     }
     static propTypes = {
         // mqtt topic is received with user_id/topic
-        mqttTopic: React.PropTypes.string.isRequired
+        mqttTopic: React.PropTypes.string.isRequired,
+        color: React.PropTypes.string
     };
 
     handleChange(event){
@@ -62,7 +63,7 @@ class ToggleSwitch extends React.Component {
                 <div style={{paddingTop: 50}}>
 
                     <input type="checkbox" id="switch1" className={style.switch} checked={this.state.value} onChange={this.handleChange} />
-                    <label htmlFor="switch1" />
+                    <label htmlFor="switch1" style={{backgroundColor: this.props.color}} />
                 </div>
 
             </div>

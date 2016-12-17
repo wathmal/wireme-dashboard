@@ -19,7 +19,8 @@ class RollerDial extends React.Component {
     }
     static propTypes = {
         // mqtt topic is received with user_id/topic
-        mqttTopic: React.PropTypes.string.isRequired
+        mqttTopic: React.PropTypes.string.isRequired,
+        color: React.PropTypes.string
     };
 
     handleChange(newValue){
@@ -55,6 +56,8 @@ class RollerDial extends React.Component {
                     onChange={this.handleChange}
                     width={180}
                     step={10}
+                    bgColor="#E0E0E0"
+                    fgColor={this.props.color}
                 />
 
             </div>

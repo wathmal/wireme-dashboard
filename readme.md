@@ -11,7 +11,10 @@ running
 npm install
 bower install
 npm start
+webpack --watch --progress
 ```
+run `webpack` command in another terminal in order to watch for changes.
+
 visit `http://localhost:3000`.
 
 

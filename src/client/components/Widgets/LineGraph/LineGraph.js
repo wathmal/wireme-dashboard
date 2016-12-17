@@ -18,7 +18,8 @@ class LineGraph extends React.Component{
     }
     static propTypes = {
         // mqtt topic is received with user_id/topic
-        mqttTopic: React.PropTypes.string.isRequired
+        mqttTopic: React.PropTypes.string.isRequired,
+        color: React.PropTypes.string
     };
 
     componentDidMount(){
@@ -37,7 +38,7 @@ class LineGraph extends React.Component{
     render(){
         return(
             <div>
-                <C3Chart data={{ json: [this.state.value], type: 'line' }} size={{height: 200}} />
+                <C3Chart data={{ json: [this.state.value], type: 'line', colors: [this.props.color] }} size={{height: 200}} />
             </div>
         )
     }

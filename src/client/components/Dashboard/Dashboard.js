@@ -98,8 +98,8 @@ class Dashboard extends React.Component{
                 <AppBar title="wireme / dashboard" >
                     <Navigation type="horizontal">
 
-
-                     <IconMenu icon='more' position='topRight' menuRipple style={{marginRight: '-1.25rem'}}>
+                        <Link href='http://' label={RM.getUsername()} icon='person' />
+                        <IconMenu icon='more' position='topRight' menuRipple style={{marginRight: '-1.25rem'}}>
                          <MenuItem value='logout' onClick={AuthService.logout} icon='exit_to_app' caption='logout' />
                      </IconMenu>
 

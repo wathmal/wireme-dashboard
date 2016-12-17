@@ -18,7 +18,9 @@ class Gauge extends React.Component{
     }
     static propTypes = {
         // mqtt topic is received with user_id/topic
-        mqttTopic: React.PropTypes.string.isRequired
+        mqttTopic: React.PropTypes.string.isRequired,
+        color: React.PropTypes.string
+
     };
 
     componentDidMount(){
@@ -33,7 +35,7 @@ class Gauge extends React.Component{
     render(){
         return(
             <div>
-                <C3Chart data={{ json: [this.state.value], type: 'gauge' }} size={{height: 200}} gauge={{min:0, max:50, label:{format: (value, ratio)=>{return value;}}}} />
+                <C3Chart data={{ json: [this.state.value], type: 'gauge', colors: [this.props.color] }} size={{height: 200}} gauge={{min:0, max:50, label:{format: (value, ratio)=>{return value;}}}} />
             </div>
         )
     }

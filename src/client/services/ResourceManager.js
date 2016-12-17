@@ -37,6 +37,26 @@ class ResourceManager{
         store.set('widgets', widgets);
     }
 
+    getColorForWidget(mqttTopic){
+        let colors = store.get('colors');
+        if(colors){
+            return colors[mqttTopic];
+        }
+        else{
+            return null;
+        }
+    }
+
+    setColorForWidget(mqttTopic, color){
+        let obj= store.get('colors');
+        // if not exists
+        if(!obj){
+            obj= {};
+        }
+        obj[mqttTopic]= color;
+        store.set('colors', obj)
+    }
+
 }
 
 export default new ResourceManager();

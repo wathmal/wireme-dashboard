@@ -2,16 +2,10 @@
 http://codepen.io/daniesy/pen/VabvNJ
 */
 
-/* Some color definitions */
-$switch_red-theme: rgb(244, 67, 54);
-$switch_blue-theme: rgb(3, 155, 229);
-$switch_green-theme: rgb(4, 196, 52);
-
-
 /* Important switch stuff */
 input[type=checkbox].switch + label{
-  width: 68px;
-  height: 28px;
+  width: 102px;
+  height: 42px;
   background: lightgray;
   display: inline-block;
   border-radius: 25px;
@@ -22,12 +16,12 @@ input[type=checkbox].switch + label{
   &:after{
     content: "";
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     background: white;
     border-radius: 50%;
     position: absolute;
-    top: -6px;
+    top: -9px;
     left: 0;
     transition: all .2s;
   }
@@ -46,37 +40,15 @@ input[type=checkbox].switch + label{
 input[type=checkbox].switch{
   display: none;
   &:checked + label{
-    background: rgba($switch_blue-theme, 0.5);
+    //background: rgba($switch_blue-theme, 0.5);
     &:before,
     &:after{
-      left: 28px;
-      background: $switch_blue-theme;
+      left: 42px;
+      background: inherit;
     }
   }
   &:disabled + label{
     opacity: 0.4;
     cursor: not-allowed;
-  }
-}
-
-input[type=checkbox].switch.green{
-  display: none;
-  &:checked + label{
-    background: rgba($switch_green-theme, 0.5);
-    &:before,
-    &:after{
-      background: $switch_green-theme;
-    }
-  }
-}
-
-input[type=checkbox].switch.red{
-  display: none;
-  &:checked + label{
-    background: rgba($switch_red-theme, 0.5);
-    &:before,
-    &:after{
-      background: $switch_red-theme;
-    }
   }
 }

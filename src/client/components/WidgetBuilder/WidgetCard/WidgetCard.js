@@ -8,7 +8,7 @@ import {Button, IconButton} from 'react-toolbox/lib/button';
 import Chip from 'react-toolbox/lib/chip';
 import Avatar from 'react-toolbox/lib/avatar';
 import RM from './../../../services/ResourceManager';
-import { TwitterPicker } from 'react-color';
+import { CirclePicker } from 'react-color';
 
 import Gauge from './../../Widgets/Gauge/Gauge';
 import LineGraph from './../../Widgets/LineGraph/LineGraph'
@@ -22,9 +22,11 @@ class WidgetCard extends React.Component {
         super();
         this.handleColorPickerButton= this.handleColorPickerButton.bind(this);
         this.handleClose= this.handleClose.bind(this);
+        this.handleColorChange= this.handleColorChange.bind(this);
 
         this.state= {
-            displayColorPicker: false
+            displayColorPicker: false,
+            color: '#EA2'
         }
     }
     static propTypes = {
@@ -43,11 +45,17 @@ class WidgetCard extends React.Component {
         this.setState({ displayColorPicker: false });
     }
 
+    handleColorChange(color){
+        this.setState({ color: color.hex });
+        RM.setColorForWidget(this.props.mqttTopic, color.hex);
+    }
+
     render(){
         // styles for color picker
         const popover = {
             position: 'absolute',
-            zIndex: '2'
+            zIndex: '2',
+            paddingLeft: 40
         };
         const cover = {
             position: 'fixed',
@@ -57,26 +65,26 @@ class WidgetCard extends React.Component {
             left: '0px'
         };
 
-        // icon button style
-        const picker={
-            marginRight: 0,
-            marginLeft: 'auto'
-        };
 
         // choose corresponding widget
         let Widget;
+        // generate props for the widget
+        let props = {
+            mqttTopic: this.props.mqttTopic,
+            color: (RM.getColorForWidget(this.props.mqttTopic))? RM.getColorForWidget(this.props.mqttTopic): this.state.color
+        };
         switch (this.props.type){
             case "gauge":
-                Widget = <Gauge mqttTopic={this.props.mqttTopic}/>;
+                Widget = <Gauge {...props} />;
                 break;
             case "line":
-                Widget = <LineGraph mqttTopic={this.props.mqttTopic} />;
+                Widget = <LineGraph {...props} />;
                 break;
             case "switch":
-                Widget = <ToggleSwitch mqttTopic={this.props.mqttTopic} />;
+                Widget = <ToggleSwitch {...props} />;
                 break;
             case "knob":
-                Widget = <RollerDial mqttTopic={this.props.mqttTopic} />;
+                Widget = <RollerDial {...props} />;
                 break;
 
         }
@@ -91,11 +99,11 @@ class WidgetCard extends React.Component {
                     {Widget}
                 </CardText>
                 <CardActions>
-                    <IconButton icon='settings' onClick={this.handleColorPickerButton} accent/>
+                    <IconButton icon='color_lens' onClick={this.handleColorPickerButton} style={{color: '#BDBDBD'}} />
                     { this.state.displayColorPicker ?
                         <div style={ popover }>
                             <div style={ cover } onClick={ this.handleClose }/>
-                            <TwitterPicker triangle="hide" />
+                            <CirclePicker onChange={this.handleColorChange} circleSize="16" colors={["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5", "#2196f3"]} />
                         </div>
                         : null
                     }
