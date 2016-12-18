@@ -70,7 +70,7 @@ class Dashboard extends React.Component{
 
         }, e=>{
             // not logged in or token not verified
-            AuthService.logout();
+            AuthService.logout(false);
         });
 
 
@@ -93,15 +93,19 @@ class Dashboard extends React.Component{
     }
 
     render(){
+        const linkStyle={
+            color: '#FFF'
+        };
+
         return(
             <div>
                 <AppBar title="wireme / dashboard" >
                     <Navigation type="horizontal">
 
-                        <Link href='http://' label={RM.getUsername()} icon='person' />
+                        <Link href='#' label={RM.getUsername()} icon='person' style={linkStyle} active />
                         <IconMenu icon='more' position='topRight' menuRipple style={{marginRight: '-1.25rem'}}>
-                         <MenuItem value='logout' onClick={AuthService.logout} icon='exit_to_app' caption='logout' />
-                     </IconMenu>
+                            <MenuItem value='logout' onClick={()=> AuthService.logout(true)} icon='exit_to_app' caption='logout' />
+                        </IconMenu>
 
 
 

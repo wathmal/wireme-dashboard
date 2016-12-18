@@ -110,8 +110,15 @@ class AuthService{
         });
     }
 
-    logout(){
-        store.clear();
+    logout(clearAll){
+
+        if(clearAll) {
+            store.clear();
+        }
+        else{
+            // keep colors
+            store.remove('token');
+        }
         window.location = '/login';
     }
     

@@ -98,6 +98,10 @@ class DBService{
                                 });
 
                         }
+                        else {
+                            // release the connection
+                            conn.release();
+                        }
 
                     });
                 }
@@ -107,7 +111,7 @@ class DBService{
     
     /*
     * set user widgets
-    * 
+    * TODO: make this a transaction.
     * params:
     * 
     * username

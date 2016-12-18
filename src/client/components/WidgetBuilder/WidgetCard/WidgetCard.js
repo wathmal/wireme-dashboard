@@ -26,7 +26,7 @@ class WidgetCard extends React.Component {
 
         this.state= {
             displayColorPicker: false,
-            color: '#EA2'
+            color: '#FFC107'
         }
     }
     static propTypes = {
@@ -103,7 +103,7 @@ class WidgetCard extends React.Component {
                     { this.state.displayColorPicker ?
                         <div style={ popover }>
                             <div style={ cover } onClick={ this.handleClose }/>
-                            <CirclePicker onChange={this.handleColorChange} circleSize="16" colors={["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5", "#2196f3"]} />
+                            <CirclePicker onChange={this.handleColorChange} circleSize="16" colors={["#F44336", "#E91E63", "#9C27B0", "#2196F3", "#009688", "#FFC107", "#795548"]} />
                         </div>
                         : null
                     }
