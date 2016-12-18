@@ -38,6 +38,7 @@ class DBService{
                 else{
                     conn.execute('SELECT * FROM user WHERE username= ? LIMIT 1', [user],
                         (err, results, fields)=>{
+                            conn.release();
                             if(err){
                                 console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
@@ -85,6 +86,8 @@ class DBService{
                             // save pwd in DB
                             conn.execute('INSERT INTO user (username, hash, name) VALUES ( ? , ? , ? )', [userObj.username, hash, userObj.name],
                                 (err, results, fields)=>{
+                                    conn.release();
+
                                     if(err){
                                         console.log(err);
                                         reject(this.responseGenerator(500, 'database error', null, err.code));
@@ -124,8 +127,8 @@ class DBService{
                 else{
                     conn.execute('DELETE FROM `user_widget` WHERE `user_id` = (SELECT id FROM user WHERE username = ? LIMIT 1)', [username],
                         (err, results, fields)=>{
-                            if(!err){
 
+                            if(!err){
                                 // generate insert values query
                                 let subQuery ="";
                                 let preparedParams= [];
@@ -138,6 +141,8 @@ class DBService{
                                 // exec
                                 conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values "+ subQuery, preparedParams,
                                     (err, results, fields)=>{
+                                        conn.release();
+
                                         if(err){
                                             console.log(err);
                                             reject(this.responseGenerator(500, 'database error', null, err.code));
@@ -149,6 +154,7 @@ class DBService{
                                     });
                             }
                             else{
+                                conn.release();
                                 console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
                             }
@@ -170,6 +176,8 @@ class DBService{
                 else{
                     conn.execute('SELECT type, title, topic FROM user_widget JOIN widget WHERE user_widget.widget_id = widget.id AND user_id= (SELECT id FROM user WHERE username= ? LIMIT 1)', [username],
                         (err, results, fields)=>{
+                            conn.release();
+
                             if(err){
                                 console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
