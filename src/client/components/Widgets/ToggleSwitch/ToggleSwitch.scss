@@ -16,13 +16,13 @@ input[type=checkbox].switch + label{
   &:after{
     content: "";
     display: inline-block;
-    width: 60px;
-    height: 60px;
+    width: 32px;
+    height: 32px;
     background: white;
     border-radius: 50%;
     position: absolute;
-    top: -9px;
-    left: 0;
+    top: 5px;
+    left: 5px;
     transition: all .2s;
   }
   &:after{
@@ -43,8 +43,8 @@ input[type=checkbox].switch{
     //background: rgba($switch_blue-theme, 0.5);
     &:before,
     &:after{
-      left: 42px;
-      background: inherit;
+      left: 65px;
+      background: white;
     }
   }
   &:disabled + label{
