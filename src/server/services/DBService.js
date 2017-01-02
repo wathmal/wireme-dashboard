@@ -50,7 +50,7 @@ class DBService{
                                 else {
                                     // compare hash with plain pwd
                                     if(Bcrypt.compareSync(pass, results[0].hash)){
-                                        fulfill(this.responseGenerator(200));
+                                        fulfill(this.responseGenerator(200,"",results[0].name));
                                     }
                                     else{
                                         reject(this.responseGenerator(401));
@@ -104,6 +104,75 @@ class DBService{
                         }
 
                     });
+                }
+            });
+        })
+    }
+
+    /*
+     * params: user object
+     * user{
+     *   username
+     *   pass
+     *   name
+     * }
+     * */
+    updateUser(userObj){
+        // assume inputs are validated
+        return new Promise((fulfill, reject) =>{
+            pool.getConnection((err, conn)=>{
+                if(err){
+                    console.log(err);
+                    reject(this.responseGenerator(500, 'database error', null, err.code));
+                }
+                else{
+
+                    conn.execute('SELECT * FROM user WHERE username= ? LIMIT 1', [userObj.old_username],
+                        (err, results, fields)=>{
+                            if(err){
+                                console.log(err);
+                                reject(this.responseGenerator(500, 'database error', null, err.code));
+                            }
+                            else{
+                                if(results.length ==0){
+                                    reject(this.responseGenerator(401));
+                                }
+                                else {
+                                    // compare hash with plain old_pwd
+                                    if(Bcrypt.compareSync(userObj.old_pass, results[0].hash)){
+                                        //add the new password
+                                        Bcrypt.hash(userObj.pass, config.saltRounds, (err, hash)=>{
+
+                                            if(!err){
+                                                // save pwd in DB
+                                                conn.execute('UPDATE user SET username=?, hash=?, name=? WHERE username=?', [userObj.username, hash, userObj.name, userObj.old_username],
+                                                    (err, results, fields)=>{
+                                                        conn.release();
+
+                                                        if(err){
+                                                            console.log(err);
+                                                            reject(this.responseGenerator(500, 'database error', null, err.code));
+                                                        }
+                                                        else{
+                                                            fulfill(this.responseGenerator(201));
+                                                        }
+                                                    });
+
+                                            }
+                                            else {
+                                                // release the connection
+                                                conn.release();
+                                            }
+
+                                        });
+
+                                    }
+                                    else{
+                                        reject(this.responseGenerator(401));
+                                    }
+                                }
+                            }
+                        });
                 }
             });
         })

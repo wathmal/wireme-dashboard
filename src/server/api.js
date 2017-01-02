@@ -28,8 +28,10 @@ apiRouter.post('/login', (req, res)=>{
             const token= JWT.sign({username: req.body.username},config.secret, {
                 expiresIn: config.tokenExpiration
             });
+
+            console.log("rep:   ", rep.data);
             // send token
-            res.status(rep.code).json({code: 200, token: token});
+            res.status(rep.code).json({code: 200, token: token, name: rep.data });
         }, err=>{
             res.status(err.code).json(err);
         })
@@ -51,6 +53,24 @@ apiRouter.post('/register', (req, res)=>{
     if(req.body.username && req.body.pass && req.body.name){
 
         DBService.registerNewUser(req.body).then(rep => {
+            res.status(rep.code).json(rep);
+        }, err=>{
+            res.status(err.code).json(err);
+        });
+    }
+    else{
+        res.status(400).json({message: 'bad input'});
+    }
+});
+
+/*
+* user profile update end point
+*
+ */
+apiRouter.post('/update', (req, res)=>{
+    if(req.body.old_username && req.body.username && req.body.pass && req.body.name && req.body.old_pass){
+
+        DBService.updateUser(req.body).then(rep => {
             res.status(rep.code).json(rep);
         }, err=>{
             res.status(err.code).json(err);
@@ -157,13 +177,7 @@ apiRouter.route('/widgets')
             console.log('no widgets');
             res.status(400).json({message: 'no widgets provided'});
         }
-
-
-        
-        
-
-
-        // delete old records
+         // delete old records
         // add new widgets
     });
 

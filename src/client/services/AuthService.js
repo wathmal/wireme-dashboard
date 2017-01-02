@@ -36,7 +36,7 @@ class AuthService{
                 success: (data) => {
                     this.setToken(data.token);
                     // get complete user object from login endpoint
-                    RM.setUser({username: username});
+                    RM.setUser({username: username, name: data.name});
                     fulfill(data);
                 },
                 error: (xhr, status, err) => {
@@ -62,6 +62,34 @@ class AuthService{
                 dataType: 'json',
                 contentType: "application/json",
                 success: (data) => {
+                    fulfill(data);
+                },
+                error: (xhr, status, err) => {
+                    reject(xhr.responseJSON);
+                }
+            });
+        });
+    }
+
+    updateProfile(old_username,name,username,old_pass,pass){
+        // jquery ajax POST request
+        const user= {
+            old_username:old_username,
+            name: name,
+            username: username,
+            old_pass:old_pass,
+            pass: pass
+        };
+
+        return new Promise((fulfill, reject) =>{
+            $.ajax({
+                method: 'POST',
+                url: '/api/update',
+                data: JSON.stringify(user),
+                dataType: 'json',
+                contentType: "application/json",
+                success: (data) => {
+                    RM.setUser({username: username, name: name});
                     fulfill(data);
                 },
                 error: (xhr, status, err) => {

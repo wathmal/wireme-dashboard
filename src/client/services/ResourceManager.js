@@ -29,6 +29,10 @@ class ResourceManager{
         return store.get('user').username;
     }
 
+    getName(){
+        return store.get('user').name;
+    }
+
     getWidgets(){
         return store.get('widgets');
     }
