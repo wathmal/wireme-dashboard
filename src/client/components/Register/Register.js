@@ -103,6 +103,7 @@ class Register extends React.Component {
                     <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>
                         <Button icon="lock_open" label='register' raised primary onClick={this.onClickRegister}/>
                     </CardActions>
+                    <CardText style={{marginLeft: 'auto', marginRight:'auto'}}>Already have an account? <a href='login'>Log in</a></CardText>
                 </Card>
 
             </div>

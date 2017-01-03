@@ -39,10 +39,6 @@ class Login extends React.Component {
         })
     }
 
-    onClickRegister(){
-        window.location = '/register';
-    }
-
     render() {
         return (
             <div className="col-md-4 col-md-offset-4 col-xs-12" style={{paddingTop: 20}}>
@@ -59,8 +55,8 @@ class Login extends React.Component {
                     </CardText>
                     <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>
                         <Button icon="lock_open" label='login' raised primary onClick={this.onClickLogin} />
-                        <Button label='register' raised primary onClick={this.onClickRegister} />
                     </CardActions>
+                    <CardText style={{marginLeft: 'auto', marginRight:'auto'}}>New to WireMe? <a href='register'>Register</a></CardText>
                 </Card>
 
             </div>
