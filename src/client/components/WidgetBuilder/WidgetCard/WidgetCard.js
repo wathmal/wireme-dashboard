@@ -15,6 +15,8 @@ import LineGraph from './../../Widgets/LineGraph/LineGraph'
 import ToggleSwitch from './../../Widgets/ToggleSwitch/ToggleSwitch';
 import RollerDial from './../../Widgets/RollerDial/RollerDial';
 
+import styles from './WidgetCard.scss';
+
 
 class WidgetCard extends React.Component {
 
@@ -55,7 +57,10 @@ class WidgetCard extends React.Component {
         const popover = {
             position: 'absolute',
             zIndex: '2',
-            paddingLeft: 40
+            padding: 10,
+            border: '1px solid #eaeaea',
+            borderRadius: 5,
+            marginTop: '-3.6rem'
         };
         const cover = {
             position: 'fixed',
@@ -101,9 +106,9 @@ class WidgetCard extends React.Component {
                 <CardActions>
                     <IconButton icon='color_lens' onClick={this.handleColorPickerButton} style={{color: '#BDBDBD'}} />
                     { this.state.displayColorPicker ?
-                        <div style={ popover }>
+                        <div className={styles.cpPropover}>
                             <div style={ cover } onClick={ this.handleClose }/>
-                            <CirclePicker onChange={this.handleColorChange} circleSize="16" colors={["#F44336", "#E91E63", "#9C27B0", "#2196F3", "#009688", "#FFC107", "#795548"]} />
+                            <CirclePicker onChange={this.handleColorChange} circleSize="16" colors={["#F44336", "#E91E63", "#9C27B0", "#2196F3", "#009688", "#FFC107", "#795548"]} width="auto" />
                         </div>
                         : null
                     }

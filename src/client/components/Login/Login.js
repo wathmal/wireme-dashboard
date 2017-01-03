@@ -6,6 +6,7 @@ import React, {PropTypes} from 'react';
 import Input from 'react-toolbox/lib/input';
 import { Card, CardText, CardActions } from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
+import Header from './../Header/Header';
 
 import AuthService from './../../services/AuthService';
 
@@ -41,24 +42,28 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="col-md-4 col-md-offset-4 col-xs-12" style={{paddingTop: 20}}>
+            <div>
+                <Header title="wireme / login" />
 
-                <Card style={{width: '100%'}}>
-                    <CardText>
-                        <div>
-                            <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
-                        </div>
-                        <section>
-                            <Input type='text' error={this.state.error} label='username' icon='perm_identity' value={this.state.username} onChange={this.handleChange.bind(this, 'username')} />
-                            <Input type='password' error={this.state.error} label='password' icon='vpn_key' value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')} />
-                        </section>
-                    </CardText>
-                    <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>
-                        <Button icon="lock_open" label='login' raised primary onClick={this.onClickLogin} />
-                    </CardActions>
-                    <CardText style={{marginLeft: 'auto', marginRight:'auto'}}>New to WireMe? <a href='register'>Register</a></CardText>
-                </Card>
+                <div className="col-md-4 col-md-offset-4 col-xs-12" style={{paddingTop: 20}}>
 
+                    <Card style={{width: '100%'}}>
+                        <CardText>
+                            <div>
+                                <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                            </div>
+                            <section>
+                                <Input type='text' error={this.state.error} label='username' icon='perm_identity' value={this.state.username} onChange={this.handleChange.bind(this, 'username')} />
+                                <Input type='password' error={this.state.error} label='password' icon='vpn_key' value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')} />
+                            </section>
+                        </CardText>
+                        <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>
+                            <Button icon="lock_open" label='login' raised primary onClick={this.onClickLogin} />
+                        </CardActions>
+                        <CardText style={{marginLeft: 'auto', marginRight:'auto', textTransform: 'uppercase'}}>new to <b>wireme?</b> <a href='register'><b>register</b></a></CardText>
+                    </Card>
+
+                </div>
             </div>
         );
     }

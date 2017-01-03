@@ -3,11 +3,7 @@
  */
 
 import React, {PropTypes} from 'react';
-import AppBar from 'react-toolbox/lib/app_bar';
-import Navigation from 'react-toolbox/lib/navigation';
-import {IconMenu, MenuItem } from 'react-toolbox/lib/menu';
-import Link from 'react-toolbox/lib/link';
-
+import Header from './../Header/Header';
 
 import WidgetBuilder from './../WidgetBuilder/WidgetBuilder';
 import MainEmitter from './../../services/MainEmitter';
@@ -93,25 +89,11 @@ class Dashboard extends React.Component{
     }
 
     render(){
-        const linkStyle={
-            color: '#FFF'
-        };
+
 
         return(
             <div>
-                <AppBar title="wireme / dashboard" >
-                    <Navigation type="horizontal">
-
-                        <Link href='profile' label={RM.getUsername()} icon='person' style={{ textDecoration: 'none', color: "white" }} />
-                        <IconMenu icon='more' position='topRight' menuRipple style={{marginRight: '-1.25rem'}}>
-                            <MenuItem value='logout' onClick={()=> AuthService.logout(true)} icon='exit_to_app' caption='logout' />
-                        </IconMenu>
-
-
-
-
-                    </Navigation>
-                </AppBar>
+                <Header title="wireme / dashboard" />
 
                 <WidgetBuilder widgets={this.state.widgets} />
             </div>
