@@ -93,7 +93,7 @@ class Dashboard extends React.Component{
 
         return(
             <div>
-                <Header title="wireme / dashboard" />
+                <Header title="dashboard" />
 
                 <WidgetBuilder widgets={this.state.widgets} />
             </div>

@@ -82,7 +82,7 @@ class Register extends React.Component {
     render() {
         return (
             <div>
-                <Header title="wireme / register" />
+                <Header title="register" />
 
                 <div className="col-md-4 col-md-offset-4 col-xs-12" style={{paddingTop: 20}}>
 

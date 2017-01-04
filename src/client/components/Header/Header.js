@@ -7,6 +7,8 @@ import AppBar from 'react-toolbox/lib/app_bar';
 import Navigation from 'react-toolbox/lib/navigation';
 import {IconMenu, MenuItem } from 'react-toolbox/lib/menu';
 import Link from 'react-toolbox/lib/link';
+import {Button} from 'react-toolbox/lib/button';
+
 
 import RM from './../../services/ResourceManager';
 import AuthService from './../../services/AuthService';
@@ -21,15 +23,19 @@ class Header extends React.Component{
     static propTypes = {
         title: React.PropTypes.string.isRequired
     };
+
+    componentDidMount(){
+        document.title= "wireme - "+this.props.title;
+
+    }
     render(){
-        const linkStyle={
-            color: '#FFF'
-        };
 
         return(
             <div>
-                <AppBar title={this.props.title} >
+                <AppBar leftIcon='home' title={"wireme / "+ this.props.title} onLeftIconClick={()=>{window.location = '/';}}>
                     <Navigation type="horizontal">
+                        <Button icon='star' label='quick start' raised onClick={()=>{window.location = '/quickstart';}} className='hidden-xs'/>
+
                         {(RM.getUser())?
                                 <Link href='profile' label={RM.getUsername()} icon='person' style={{ textDecoration: 'none', color: "white" }} />
                             : null

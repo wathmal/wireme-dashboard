@@ -43,7 +43,7 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <Header title="wireme / login" />
+                <Header title="login" />
 
                 <div className="col-md-4 col-md-offset-4 col-xs-12" style={{paddingTop: 20}}>
 

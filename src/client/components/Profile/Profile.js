@@ -104,7 +104,7 @@ class Profile extends React.Component {
     render() {
         return (
             <div>
-                <Header title="wireme / profile" />
+                <Header title="profile" />
 
                 <div className="col-md-10 col-md-offset-1 col-xs-12" style={{paddingTop: 20}}>
 
