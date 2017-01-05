@@ -68,15 +68,21 @@ apiRouter.post('/register', (req, res)=>{
 *
  */
 apiRouter.post('/update', (req, res)=>{
-    if(req.body.old_username && req.body.username && req.body.pass && req.body.name && req.body.old_pass){
 
+    if(req.body.old_username && req.body.username && req.body.pass && req.body.name && req.body.old_pass){
         DBService.updateUser(req.body).then(rep => {
             res.status(rep.code).json(rep);
         }, err=>{
             res.status(err.code).json(err);
         });
-    }
-    else{
+    }else if(req.body.old_username && req.body.username && req.body.name){
+        DBService.updatePartial(req.body).then(rep => {
+            res.status(rep.code).json(rep);
+        }, err=>{
+            res.status(err.code).json(err);
+        });
+
+    }else{
         res.status(400).json({message: 'bad input'});
     }
 });
