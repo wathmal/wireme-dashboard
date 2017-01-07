@@ -9,8 +9,8 @@ import Bcrypt from 'bcrypt';
 
 let pool;
 
-class DBService{
-    constructor(){
+class DBService {
+    constructor() {
         pool = Mysql.createPool({
             connectionLimit: 10,
             host: config.db.host,
@@ -20,39 +20,39 @@ class DBService{
         });
 
         /*conn.connect((err) =>{
-            if (err) {
-                console.log(err);
-            } else {
-                console.log("connected to mysql server successfully");
-            }
-        });*/
+         if (err) {
+         console.log(err);
+         } else {
+         console.log("connected to mysql server successfully");
+         }
+         });*/
     }
-    
-    loginWithPass(user, pass){
-        return new Promise((fulfill, reject) =>{
-            pool.getConnection((err, conn)=>{
-                if(err){
+
+    loginWithPass(user, pass) {
+        return new Promise((fulfill, reject) => {
+            pool.getConnection((err, conn)=> {
+                if (err) {
                     console.log(err);
                     reject(this.responseGenerator(500, 'database error', null, err.code));
                 }
-                else{
+                else {
                     conn.execute('SELECT * FROM user WHERE username= ? LIMIT 1', [user],
-                        (err, results, fields)=>{
+                        (err, results, fields)=> {
                             conn.release();
-                            if(err){
+                            if (err) {
                                 console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
                             }
-                            else{
-                                if(results.length ==0){
+                            else {
+                                if (results.length == 0) {
                                     reject(this.responseGenerator(401));
                                 }
                                 else {
                                     // compare hash with plain pwd
-                                    if(Bcrypt.compareSync(pass, results[0].hash)){
-                                        fulfill(this.responseGenerator(200,"",results[0].name));
+                                    if (Bcrypt.compareSync(pass, results[0].hash)) {
+                                        fulfill(this.responseGenerator(200, "", results[0].name));
                                     }
-                                    else{
+                                    else {
                                         reject(this.responseGenerator(401));
                                     }
                                 }
@@ -64,35 +64,35 @@ class DBService{
     }
 
     /*
-    * params: user object
-    * user{
-    *   username
-    *   pass
-    *   name
-    * }
-    * */
-    registerNewUser(userObj){
+     * params: user object
+     * user{
+     *   username
+     *   pass
+     *   name
+     * }
+     * */
+    registerNewUser(userObj) {
         // assume inputs are validated
-        return new Promise((fulfill, reject) =>{
-            pool.getConnection((err, conn)=>{
-                if(err){
+        return new Promise((fulfill, reject) => {
+            pool.getConnection((err, conn)=> {
+                if (err) {
                     console.log(err);
                     reject(this.responseGenerator(500, 'database error', null, err.code));
                 }
-                else{
-                    Bcrypt.hash(userObj.pass, config.saltRounds, (err, hash)=>{
+                else {
+                    Bcrypt.hash(userObj.pass, config.saltRounds, (err, hash)=> {
 
-                        if(!err){
+                        if (!err) {
                             // save pwd in DB
                             conn.execute('INSERT INTO user (username, hash, name) VALUES ( ? , ? , ? )', [userObj.username, hash, userObj.name],
-                                (err, results, fields)=>{
+                                (err, results, fields)=> {
                                     conn.release();
 
-                                    if(err){
+                                    if (err) {
                                         console.log(err);
                                         reject(this.responseGenerator(500, 'database error', null, err.code));
                                     }
-                                    else{
+                                    else {
                                         fulfill(this.responseGenerator(201));
                                     }
                                 });
@@ -117,43 +117,43 @@ class DBService{
      *   name
      * }
      * */
-    updateUser(userObj){
+    updateUser(userObj) {
         // assume inputs are validated
-        return new Promise((fulfill, reject) =>{
-            pool.getConnection((err, conn)=>{
-                if(err){
+        return new Promise((fulfill, reject) => {
+            pool.getConnection((err, conn)=> {
+                if (err) {
                     console.log(err);
                     reject(this.responseGenerator(500, 'database error', null, err.code));
                 }
-                else{
+                else {
 
                     conn.execute('SELECT * FROM user WHERE username= ? LIMIT 1', [userObj.old_username],
-                        (err, results, fields)=>{
-                            if(err){
+                        (err, results, fields)=> {
+                            if (err) {
                                 console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
                             }
-                            else{
-                                if(results.length ==0){
+                            else {
+                                if (results.length == 0) {
                                     reject(this.responseGenerator(401));
                                 }
                                 else {
                                     // compare hash with plain old_pwd
-                                    if(Bcrypt.compareSync(userObj.old_pass, results[0].hash)){
+                                    if (Bcrypt.compareSync(userObj.old_pass, results[0].hash)) {
                                         //add the new password
-                                        Bcrypt.hash(userObj.pass, config.saltRounds, (err, hash)=>{
+                                        Bcrypt.hash(userObj.pass, config.saltRounds, (err, hash)=> {
 
-                                            if(!err){
-                                                // save pwd in DB
+                                            if (!err) {
+                                                //update user profile
                                                 conn.execute('UPDATE user SET username=?, hash=?, name=? WHERE username=?', [userObj.username, hash, userObj.name, userObj.old_username],
-                                                    (err, results, fields)=>{
+                                                    (err, results, fields)=> {
                                                         conn.release();
 
-                                                        if(err){
+                                                        if (err) {
                                                             console.log(err);
                                                             reject(this.responseGenerator(500, 'database error', null, err.code));
                                                         }
-                                                        else{
+                                                        else {
                                                             fulfill(this.responseGenerator(201));
                                                         }
                                                     });
@@ -167,7 +167,7 @@ class DBService{
                                         });
 
                                     }
-                                    else{
+                                    else {
                                         reject(this.responseGenerator(401));
                                     }
                                 }
@@ -177,56 +177,105 @@ class DBService{
             });
         })
     }
-    
-    /*
-    * set user widgets
-    * TODO: make this a transaction.
-    * params:
-    * 
-    * username
-    * widgets: [
-    *   
-    * ]
-    * */
-    setWidgets(username, widgetsAry){
-        return new Promise((fulfill, reject)=>{
-            // remove user widgets first
-            // make it a transaction
-            pool.getConnection((err, conn)=>{
-                if(err){
+
+
+    updatePartial(userObj) {
+        // assume inputs are validated
+        return new Promise((fulfill, reject) => {
+            pool.getConnection((err, conn)=> {
+                if (err) {
                     console.log(err);
                     reject(this.responseGenerator(500, 'database error', null, err.code));
                 }
-                else{
-                    conn.execute('DELETE FROM `user_widget` WHERE `user_id` = (SELECT id FROM user WHERE username = ? LIMIT 1)', [username],
-                        (err, results, fields)=>{
+                else {
 
-                            if(!err){
+                    conn.execute('SELECT * FROM user WHERE username= ? LIMIT 1', [userObj.old_username],
+                        (err, results, fields)=> {
+                            if (err) {
+                                console.log(err);
+                                reject(this.responseGenerator(500, 'database error', null, err.code));
+                            }
+                            else {
+                                if (results.length == 0) {
+                                    reject(this.responseGenerator(401));
+                                }
+                                else {
+
+                                    if (userObj.old_pass == '') {
+                                        //console.log("no pwd change "+userObj.username+"  "+ userObj.name);
+                                        //update user profile
+                                        conn.execute('UPDATE user SET username=?, name=? WHERE username=?', [userObj.username, userObj.name, userObj.old_username],
+                                            (err, results, fields)=> {
+                                                conn.release();
+
+                                                if (err) {
+                                                    console.log(err);
+                                                    reject(this.responseGenerator(500, 'database error', null, err.code));
+                                                }
+                                                else {
+                                                    fulfill(this.responseGenerator(201));
+                                                }
+                                            });
+                                    } else {
+                                        reject(this.responseGenerator(401));
+                                    }
+                                }
+                            }
+                        });
+                }
+            });
+        })
+    }
+
+    /*
+     * set user widgets
+     * TODO: make this a transaction.
+     * params:
+     *
+     * username
+     * widgets: [
+     *
+     * ]
+     * */
+    setWidgets(username, widgetsAry) {
+        return new Promise((fulfill, reject)=> {
+            // remove user widgets first
+            // make it a transaction
+            pool.getConnection((err, conn)=> {
+                if (err) {
+                    console.log(err);
+                    reject(this.responseGenerator(500, 'database error', null, err.code));
+                }
+                else {
+                    conn.execute('DELETE FROM `user_widget` WHERE `user_id` = (SELECT id FROM user WHERE username = ? LIMIT 1)', [username],
+                        (err, results, fields)=> {
+
+                            if (!err) {
                                 // generate insert values query
-                                let subQuery ="";
-                                let preparedParams= [];
-                                for(let i in widgetsAry){
-                                    (i != 0)? subQuery+= ', ': subQuery += '';
+                                let subQuery = "";
+                                let preparedParams = [];
+                                for (let i in widgetsAry) {
+                                    (i != 0) ? subQuery += ', ' : subQuery += '';
                                     subQuery += "((SELECT id FROM user WHERE username= ? ), (SELECT id FROM widget WHERE type= ? ), ? , ? )";
                                     preparedParams.push(username, widgetsAry[i].type, widgetsAry[i].topic, widgetsAry[i].title);
                                 }
 
                                 // exec
-                                conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values "+ subQuery, preparedParams,
-                                    (err, results, fields)=>{
+                                conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values " + subQuery, preparedParams,
+                                    (err, results, fields)=> {
                                         conn.release();
 
-                                        if(err){
+                                        if (err) {
                                             console.log(err);
                                             reject(this.responseGenerator(500, 'database error', null, err.code));
                                         }
-                                        else{
+                                        else {
                                             // changed status code from 201 to 200 due to ActionScript constraints
                                             fulfill(this.responseGenerator(200, 'added'));
                                         }
                                     });
                             }
-                            else{
+                            else {
                                 conn.release();
                                 console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
@@ -237,50 +286,50 @@ class DBService{
 
         })
     }
-    
-    getWidgets(username){
-        return new Promise((fulfill, reject)=>{
+
+    getWidgets(username) {
+        return new Promise((fulfill, reject)=> {
             // get widgets from DB
-            pool.getConnection((err, conn)=>{
-                if(err){
+            pool.getConnection((err, conn)=> {
+                if (err) {
                     console.log(err);
                     reject(this.responseGenerator(500, 'database error', null, err.code));
                 }
-                else{
+                else {
                     conn.execute('SELECT type, title, topic FROM user_widget JOIN widget WHERE user_widget.widget_id = widget.id AND user_id= (SELECT id FROM user WHERE username= ? LIMIT 1)', [username],
-                        (err, results, fields)=>{
+                        (err, results, fields)=> {
                             conn.release();
 
-                            if(err){
+                            if (err) {
                                 console.log(err);
                                 reject(this.responseGenerator(500, 'database error', null, err.code));
                             }
-                            else{
+                            else {
                                 fulfill(this.responseGenerator(200, null, results));
                             }
                         });
                 }
             });
-            
+
         });
     }
 
     // function to generate response to be sent as API resp.
-    responseGenerator(code, message, data, error){
-        let res={
+    responseGenerator(code, message, data, error) {
+        let res = {
             code: code
         };
-        
-        if(message){
+
+        if (message) {
             res.message = message;
         }
-        if(data){
-            res.data= data;
+        if (data) {
+            res.data = data;
         }
-        if(error){
-            res.error= error;
+        if (error) {
+            res.error = error;
         }
-        
+
         return res;
     }
 }
