@@ -4,7 +4,7 @@
 
 /*
 * global resource manager for serving user data
-* also manages auth actions
+* for Auth related actions check: AuthService
 * */
 
 import store from 'store';
@@ -26,11 +26,23 @@ class ResourceManager{
     }
 
     getUsername(){
-        return store.get('user').username;
+        const user = this.getUser();
+        if(user && user.hasOwnProperty('username')){
+            return user.username;
+        }
+        else{
+            return null;
+        }
     }
 
     getName(){
-        return store.get('user').name;
+        const user = this.getUser();
+        if(user && user.hasOwnProperty('name')){
+            return user.name;
+        }
+        else{
+            return null;
+        }
     }
 
     getWidgets(){
