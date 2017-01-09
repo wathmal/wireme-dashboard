@@ -7,11 +7,17 @@ import Input from 'react-toolbox/lib/input';
 import { Card, CardText, CardActions } from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 import {Table} from 'react-toolbox/lib/table';
+import {Dialog} from 'react-toolbox/lib/dialog';
 
 import Header from './../Header/Header';
 import AuthService from './../../services/AuthService';
 import RM from './../../services/ResourceManager';
 
+const table_model = {
+    title: {type: String},
+    type: {type: String},
+    topic: {type: String}
+};
 
 class Profile extends React.Component {
 
@@ -110,68 +116,49 @@ class Profile extends React.Component {
     }
 
     render() {
-        //console.log(JSON.stringify(this.state.widgets));
-        //let Widgets = [];
-        //// console.log(this.props.widgets);
-        //if (this.state.widgets.length > 0) {
-        //    for (let c = 0; c < this.state.widgets.length; c++) {
-        //        Widgets.push(
-        //            <label> title: {this.state.widgets[c].title}</label>
-        //        )
-        //    }
-        //}
 
         return (
             <div>
                 <Header title="profile"/>
 
                 <div className="col-md-10 col-md-offset-1 col-xs-12" style={{paddingTop: 20}}>
+                    <div>
+                        <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt=""
+                             className="img-responsive"
+                             style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                    </div>
+                    <section >
+                        <Input type='text' error={this.state.error+this.state.error+this.state.blank_name}
+                               label='name'
+                               value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>
+                        <Input type='text' error={this.state.error+this.state.blank_user} label='username'
+                               value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
 
-                    <Card style={{width: '100%'}}>
-                        <CardText>
-                            <div>
-                                <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt=""
-                                     className="img-responsive"
-                                     style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
-                            </div>
-                            <section >
-                                <Input type='text' error={this.state.error+this.state.error+this.state.blank_name}
-                                       label='name'
-                                       value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>
-                                <Input type='text' error={this.state.error+this.state.blank_user} label='username'
-                                       value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
-                                <table style={{width:'60%'}}>
-                                    <thead>
-                                    <th>title</th><th>type</th><th>topic</th>
-                                    </thead>
-                                    <tbody>
-                                    {this.state.widgets.map((widget, i) => <TableRow key = {i} data = {widget} />)}
-                                    </tbody>
-                                </table>
+                        <Table
+                            model={table_model}
+                            source={this.state.widgets}
+                        />
 
-                            </section>
-                            <section hidden={this.state.visible}>
-                                <Input type='password' error={this.state.error+this.state.blank_pass}
-                                       label='old password'
-                                       value={this.state.old_pwd} onChange={this.handleChange.bind(this, 'old_pwd')}/>
-                                <Input type='password'
-                                       error={this.state.miss_match_pwd+this.state.error+this.state.blank_pass}
-                                       label='new password'
-                                       value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')}/>
-                                <Input type='password' error={this.state.miss_match_pwd+this.state.error}
-                                       label='confirm new password'
-                                       value={this.state.conf_pwd} onChange={this.handleChange.bind(this, 'conf_pwd')}/>
-                            </section>
-                        </CardText>
-                        <CardActions style={{marginRight:'auto'}}>
-                            <Button disabled={this.state.visible2} label='change password' flat
-                                    onClick={this.showForm}/>
-                        </CardActions>
-                        <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>
-                            <Button disabled={this.state.visible3} icon="update" label='update' raised primary
-                                    onClick={this.onClickUpdate}/>
-                        </CardActions>
-                    </Card>
+                    </section>
+                    <section hidden={this.state.visible}>
+                        <Input type='password' error={this.state.error+this.state.blank_pass}
+                               label='old password'
+                               value={this.state.old_pwd} onChange={this.handleChange.bind(this, 'old_pwd')}/>
+                        <Input type='password'
+                               error={this.state.miss_match_pwd+this.state.error+this.state.blank_pass}
+                               label='new password'
+                               value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')}/>
+                        <Input type='password' error={this.state.miss_match_pwd+this.state.error}
+                               label='confirm new password'
+                               value={this.state.conf_pwd} onChange={this.handleChange.bind(this, 'conf_pwd')}/>
+                    </section>
+
+                    <Button disabled={this.state.visible2} label='change password' flat
+                            onClick={this.showForm}/> <br/>
+                    <div  style={{marginLeft: '40%', paddingTop: 20}}>
+                        <Button icon="update" label='update' raised primary
+                                onClick={this.onClickUpdate}/>
+                    </div>
 
                 </div>
             </div>
@@ -181,6 +168,15 @@ class Profile extends React.Component {
 }
 
 class TableRow extends React.Component {
+
+    //<table style={{width:'60%'}}>
+    //    <thead>
+    //    <th>title</th><th>type</th><th>topic</th>
+    //    </thead>
+    //    <tbody>
+    //    {this.state.widgets.map((widget, i) => <TableRow key = {i} data = {widget} />)}
+    //    </tbody>
+    //</table>
     render() {
         return (
             <tr>
