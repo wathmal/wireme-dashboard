@@ -43,6 +43,7 @@ class Profile extends React.Component {
             visible: true,
             visible2: false,
             btn_enabled: false,
+            check_box:false,
             widgets: RM.getWidgets()
         }
 
@@ -133,10 +134,11 @@ class Profile extends React.Component {
                                value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>
                         <Input type='text' error={this.state.error+this.state.blank_user} label='username'
                                value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
-
+                        <label >user widget details</label>
                         <Table
                             model={table_model}
                             source={this.state.widgets}
+                            selectable={this.state.check_box}
                         />
 
                     </section>
