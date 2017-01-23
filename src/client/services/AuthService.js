@@ -73,8 +73,6 @@ class AuthService{
 
     updateProfile(old_username,name,username,old_pass,pass){
         // jquery ajax POST request
-
-        console.log("heree");
         const user= {
             old_username:old_username,
             name: name,
