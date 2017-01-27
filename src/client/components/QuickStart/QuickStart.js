@@ -29,26 +29,7 @@ class QuickStart extends React.Component {
         }
     }
     showForm() {
-
-        this.setState({visible: true, visible1: true, visible2: true, visible3: true});
-        //switch (topic){
-        //    case 0:
-        //        console.log("here i am 0");
-        //        this.setState({visible: false});
-        //        break;
-        //    case 1:
-        //        console.log("here i am 1");
-        //        this.setState({visible1: false});
-        //        break;
-        //    case 2:
-        //        console.log("here i am 2");
-        //        this.setState({visible2: false});
-        //        break;
-        //    case 3:
-        //        console.log("here i am 3");
-        //        this.setState({visible3: false});
-        //        break;
-        //}
+        this.setState({visible: false, visible1: true, visible2: true, visible3: true});
     }
 
     showForm1(){
@@ -67,16 +48,12 @@ class QuickStart extends React.Component {
             <div>
                 <Header title="quick start" />
 
-                <div className="container" style={{paddingTop: 20, paddingBottom:10}}>
-
-                    <img src="images/headers/quick_start.png" alt="wireme quick start" className="img-responsive"/>
-                </div>
-                <div className="col-md-2" >
+                <div className="col-md-2" style={{backgroundColor:'#eeffaa', height:'100%'}} >
                     <Navigation type='vertical'>
                         <Link onClick={this.showForm} label="Overview" style={{ fontSize:'14px' , textDecoration: 'none' }} />
-                        <Link onClick={this.showForm1} label="Make Connection" style={{ fontSize:'14px' , textDecoration: 'none' }} />
-                        <Link onClick={this.showForm2} label="Add a new Component" style={{ fontSize:'14px' , textDecoration: 'none' }} />
-                        <Link onClick={this.showForm3} label="Own logic" style={{ fontSize:'14px' , textDecoration: 'none' }} />
+                        <Link onClick={this.showForm1} label="Getting Started" style={{ fontSize:'14px' , textDecoration: 'none' }} />
+                        <Link onClick={this.showForm2} label="Additional Features " style={{ fontSize:'14px' , textDecoration: 'none' }} />
+                        <Link onClick={this.showForm3} label="???" style={{ fontSize:'14px' , textDecoration: 'none' }} />
                     </Navigation>
                 </div>
                 <div className="col-md-10" style={{paddingTop: 20}}>
