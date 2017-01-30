@@ -150,7 +150,7 @@ class First extends React.Component {
                                        subtitle="Connect the WireMe Nemesis to external power supply"/>
                             <CardText>
                                 <div>
-                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/nemesis.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
                                 </div>
                             </CardText>
                         </Card>
@@ -161,7 +161,7 @@ class First extends React.Component {
                                         subtitle="Connect the gadgets according to color labels"/>
                             <CardText>
                                 <div>
-                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/nemesis.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
                                 </div>
                             </CardText>
                         </Card>
@@ -172,7 +172,7 @@ class First extends React.Component {
                                        subtitle="Turn on the WireMe Nemesis"/>
                             <CardText>
                                 <div>
-                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/nemesis.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
                                 </div>
                             </CardText>
                         </Card>
@@ -182,7 +182,7 @@ class First extends React.Component {
                 <div className="row">
                     <h4 style={{padding: 15}}>Easy Access With The Online Dashboard </h4>
                     <p>You can login to your own personalized dashboard form <a>here</a></p>
-                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="code upload image"
+                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/dashboard.png" alt="code upload image"
                          className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width:600, height:'auto'}}/>
                 </div>
             </div>
