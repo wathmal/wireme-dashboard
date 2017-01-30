@@ -137,6 +137,7 @@ class Profile extends React.Component {
                         <Table
                             model={table_model}
                             source={this.state.widgets}
+                            selectable={false}
                         />
 
                     </section>
