@@ -28,7 +28,9 @@ class Gauge extends React.Component{
         MainEmitter.on(this.props.mqttTopic, (payload) => {
             // update the state value
             // payload should be in type {value: int}
-            this.setState({value: payload.value})
+            if(payload.value) {
+                this.setState({value: payload.value})
+            }
         })
     }
 
