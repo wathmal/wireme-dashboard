@@ -128,7 +128,7 @@ class First extends React.Component {
                 <div className="row">
                     <h4 style={{padding: 15}}>Let's Activate WireMe Nemesis</h4>
                     <p>Main components of the IoT Hub</p>
-                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="code upload image"
+                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/upload.png" alt="code upload image"
                          className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width:600, height:'auto'}}/>
                 </div>
 
