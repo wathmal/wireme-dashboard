@@ -28,10 +28,6 @@ class Overview extends React.Component {
                 <div className="w3-content w3-display-container">
                     <img  src="http://wireme.projects.mrt.ac.lk/images/tutorial/overview.png" alt="overview image"
                          className="mySlides img-responsive" style={{marginLeft: 'auto', marginRight:'auto', height:'300px'}}/>
-                    <img  src="http://wireme.projects.mrt.ac.lk/images/tutorial/nemesis.png" alt="overview image"
-                         className="mySlides img-responsive" style={{marginLeft: 'auto', marginRight:'auto', height:'300px'}}/>
-                    <img  src="http://wireme.projects.mrt.ac.lk/images/tutorial/dashboard.png" alt="overview image"
-                          className="mySlides img-responsive" style={{marginLeft: 'auto', marginRight:'auto', height:'300px'}}/>
                 </div>
 
                 <div className="text-center" >
@@ -51,7 +47,7 @@ class Overview extends React.Component {
                         </div>
                         <div className="col-md-3 col-md-offset-1">
                             <div>
-                                <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/nemisis.png" alt=""
+                                <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/nemesis.png" alt=""
                                      className="img-responsive"
                                      style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
                             </div>
