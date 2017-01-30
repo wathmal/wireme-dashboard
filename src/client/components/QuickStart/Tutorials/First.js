@@ -21,6 +21,7 @@ class First extends React.Component {
         return (
             <div className="text-center">
                 <div style={{padding: 20}}><h2>Getting Started</h2></div>
+                <h5>Think Drag and Drop. No Coding</h5>
 
                 <div className="row " style={{padding: 20}}>
                     <div className="col-md-6">
@@ -46,11 +47,11 @@ class First extends React.Component {
                 </div>
 
                 <div className="row">
-                    <h3 style={{padding: 20}}>Start Your First Program</h3>
+                    <h4 style={{padding: 20}}>Start Your First Program</h4>
                 </div>
 
 
-                <h4 style={{padding: 20}} >Monitor Home Temperature</h4>
+                <p style={{paddingTop: 10}}>Let's Make a Gadget to Monitor Home Temperature</p>
                 <div className="row">
                     <div className="col-md-4">
                         <Card style={{height: '412px'}} >
@@ -123,30 +124,70 @@ class First extends React.Component {
                     </div>
                 </div>
 
-                <p>You can download this simple example project from here. [link]
-                </p>
-                <h4>Let’s Go Live</h4>
-                <p>Note: make sure to select correct serial port from the menu.
+                <p style={{paddingTop: 20}}>You can download this simple example project from <a>here.</a></p>
+                <div className="row">
+                    <h4 style={{padding: 15}}>Let's Activate WireMe Nemesis</h4>
+                    <p>Main components of the IoT Hub</p>
+                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="code upload image"
+                         className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width:600, height:'auto'}}/>
+                </div>
+
+                <p style={{paddingTop: 20}}>Note: make sure to select correct serial port from the menu.
                     [Screenshot]
                     <br/>
                     Be patient while uploading finished.
                     [scrn]
                 </p>
-                <h4>Get Connected</h4>
-                <p>Connect the WireMe Nemesis to external power supply.
-                    Then connect the modules to match with the colors.
-                    [images]
-                    <br/>
 
-                    Turn on the WireMe Nemesis.
-                </p>
-                <h4>Monitor The Dashboard</h4>
-                <p>You can login to your own personalized dashboard using our homepage.
-                </p>
+                <div className="row">
+                    <h4 style={{padding: 15}}>Make Your Gadget Live</h4>
+                </div>
 
+                <div className="row" style={{paddingTop:20}}>
+                    <div className="col-md-4">
+                        <Card style={{height: '300px'}} >
+                            <CardTitle title="Step 1"
+                                       subtitle="Connect the WireMe Nemesis to external power supply"/>
+                            <CardText>
+                                <div>
+                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                </div>
+                            </CardText>
+                        </Card>
+                    </div>
+                    <div className="col-md-4">
+                        <Card style={{height: '300px'}} >
+                            <CardTitle  title="Step 2"
+                                        subtitle="Connect the gadgets according to color labels"/>
+                            <CardText>
+                                <div>
+                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                </div>
+                            </CardText>
+                        </Card>
+                    </div>
+                    <div className="col-md-4">
+                        <Card style={{height: '300px'}}>
+                            <CardTitle title="Step 3"
+                                       subtitle="Turn on the WireMe Nemesis"/>
+                            <CardText>
+                                <div>
+                                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                </div>
+                            </CardText>
+                        </Card>
+                    </div>
+                </div>
 
+                <div className="row">
+                    <h4 style={{padding: 15}}>Easy Access With The Online Dashboard </h4>
+                    <p>You can login to your own personalized dashboard form <a>here</a></p>
+                    <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/#" alt="code upload image"
+                         className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width:600, height:'auto'}}/>
+                </div>
             </div>
-        )
+
+            )
     }
 
 }

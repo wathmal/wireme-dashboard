@@ -47,15 +47,17 @@ class QuickStart extends React.Component {
         return (
             <div>
                 <Header title="quick start" />
-
-                <div className="col-md-2" style={{backgroundColor:'#eeffaa', height:'100%'}} >
+                <div className="col-md-2" style={{backgroundColor:'#eeffaa', height:'100%', position:'relative'}} >
                     <Navigation type='vertical'>
                         <Link onClick={this.showForm} label="Overview" style={{ fontSize:'14px' , textDecoration: 'none' }} />
                         <Link onClick={this.showForm1} label="Getting Started" style={{ fontSize:'14px' , textDecoration: 'none' }} />
                         <Link onClick={this.showForm2} label="Additional Features " style={{ fontSize:'14px' , textDecoration: 'none' }} />
-                        <Link onClick={this.showForm3} label="???" style={{ fontSize:'14px' , textDecoration: 'none' }} />
+                        <Link onClick={this.showForm3} label="slider" style={{ fontSize:'14px' , textDecoration: 'none' }} />
                     </Navigation>
                 </div>
+
+
+
                 <div className="col-md-10" style={{paddingTop: 20}}>
                     <section hidden={this.state.visible}><Overview /></section>
                     <section hidden={this.state.visible1}><First /></section>

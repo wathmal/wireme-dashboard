@@ -19,9 +19,11 @@ class Third extends React.Component {
     render() {
 
         return (
+
             <div>
-                <h1>Custom logics</h1>
+
             </div>
+
         )
     }
 

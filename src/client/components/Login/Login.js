@@ -50,7 +50,7 @@ class Login extends React.Component {
                     <Card style={{width: '100%'}}>
                         <CardText>
                             <div>
-                                    <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
                             </div>
                             <section>
                                 <Input type='text' error={this.state.error} label='username' icon='perm_identity' value={this.state.username} onChange={this.handleChange.bind(this, 'username')} />
