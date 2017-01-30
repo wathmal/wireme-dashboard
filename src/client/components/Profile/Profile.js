@@ -8,6 +8,7 @@ import { Card, CardText, CardActions } from 'react-toolbox/lib/card';
 import {Button} from 'react-toolbox/lib/button';
 import {Table} from 'react-toolbox/lib/table';
 import {Dialog} from 'react-toolbox/lib/dialog';
+import {Link} from 'react-toolbox/lib/link'
 
 import Header from './../Header/Header';
 import AuthService from './../../services/AuthService';
@@ -43,6 +44,7 @@ class Profile extends React.Component {
             visible: true,
             visible2: false,
             btn_enabled: false,
+            check_box:false,
             widgets: RM.getWidgets()
         }
 
@@ -133,12 +135,15 @@ class Profile extends React.Component {
                                value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>
                         <Input type='text' error={this.state.error+this.state.blank_user} label='username'
                                value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
-
+                        <label style={{fontSize:'12px', color:'#757575'}} >user widget details</label>
                         <Table
                             model={table_model}
                             source={this.state.widgets}
-                            selectable={false}
+                            selectable={this.state.check_box}
                         />
+                        <div style={{width:'130px'}}>
+                            <Link active={this.state.visible} onClick={this.showForm} label="change password" style={{ fontSize:'14px' , textDecoration: 'none' }} />
+                        </div>
 
                     </section>
                     <section hidden={this.state.visible}>
@@ -153,9 +158,6 @@ class Profile extends React.Component {
                                label='confirm new password'
                                value={this.state.conf_pwd} onChange={this.handleChange.bind(this, 'conf_pwd')}/>
                     </section>
-
-                    <Button disabled={this.state.visible2} label='change password' flat
-                            onClick={this.showForm}/> <br/>
                     <div  style={{marginLeft: '40%', paddingTop: 20}}>
                         <Button icon="update" label='update' raised primary
                                 onClick={this.onClickUpdate}/>
@@ -164,27 +166,6 @@ class Profile extends React.Component {
                 </div>
             </div>
 
-        );
-    }
-}
-
-class TableRow extends React.Component {
-
-    //<table style={{width:'60%'}}>
-    //    <thead>
-    //    <th>title</th><th>type</th><th>topic</th>
-    //    </thead>
-    //    <tbody>
-    //    {this.state.widgets.map((widget, i) => <TableRow key = {i} data = {widget} />)}
-    //    </tbody>
-    //</table>
-    render() {
-        return (
-            <tr>
-                <td>{this.props.data.title}</td>
-                <td>{this.props.data.type}</td>
-                <td>{this.props.data.topic}</td>
-            </tr>
         );
     }
 }
