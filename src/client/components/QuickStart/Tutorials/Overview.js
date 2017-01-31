@@ -28,11 +28,14 @@ class Overview extends React.Component {
                 <div className="w3-content w3-display-container">
                     <img  src="http://wireme.projects.mrt.ac.lk/images/tutorial/overview.png" alt="overview image"
                          className="mySlides img-responsive" style={{marginLeft: 'auto', marginRight:'auto', height:'300px'}}/>
+                    <img  src="http://wireme.projects.mrt.ac.lk/images/tutorial/dashboard.png" alt="overview image"
+                          className="mySlides img-responsive" style={{marginLeft: 'auto', marginRight:'auto', height:'300px'}}/>
+                    <img  src="http://wireme.projects.mrt.ac.lk/images/tutorial/nemesis.png" alt="overview image"
+                          className="mySlides img-responsive" style={{marginLeft: 'auto', marginRight:'auto', height:'300px'}}/>
                 </div>
 
                 <div className="text-center" >
-                    <h3>Welcome to the WireMe homepage</h3>
-                    <p style={{padding: 10}}>WireMe introduce you the WireMe IoT Hub and the WireMe Nemesis as our first set of products</p>
+                    <p style={{padding: 10, paddingTop:20}}>WireMe introduce you the WireMe IoT Hub and the WireMe Nemesis as our first set of products</p>
 
 
                     <div className="row">

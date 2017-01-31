@@ -32,7 +32,7 @@ class Header extends React.Component{
 
         return(
             <div>
-                <AppBar className="topbar" leftIcon='home' title={"wireme / "+ this.props.title} onLeftIconClick={()=>{window.location = '/';}}>
+                <AppBar leftIcon='home' title={"wireme / "+ this.props.title} onLeftIconClick={()=>{window.location = '/';}}>
                     <Navigation type="horizontal">
                         <Button icon='star' label='quick start' raised onClick={()=>{window.location = '/quickstart';}} className='hidden-xs'/>
 
