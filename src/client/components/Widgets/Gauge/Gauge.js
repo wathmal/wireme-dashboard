@@ -31,6 +31,9 @@ class Gauge extends React.Component{
             if(payload.value) {
                 this.setState({value: payload.value})
             }
+            else {
+                this.setState({value: 0})
+            }
         })
     }
 
