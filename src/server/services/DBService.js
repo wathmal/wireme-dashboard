@@ -98,8 +98,17 @@ class DBService {
                                 });
 
                             //run the bash command to add new user to mosquito pwfile
-                            spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass], function (data) {
-                                console.log('added usr to mqtt'+data);
+                            const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
+                            mosquitto.stdout.on('data', (data) => {
+                                console.log(`stdout: ${data}`);
+                            });
+
+                            mosquitto.stderr.on('data', (data) => {
+                                console.log(`stderr: ${data}`);
+                            });
+
+                            mosquitto.on('close', (code) => {
+                                console.log(`child process exited with code ${code}`);
                             });
 
                         }
