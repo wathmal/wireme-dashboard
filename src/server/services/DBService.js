@@ -98,6 +98,7 @@ class DBService {
                                 });
 
                             //run the bash command to add new user to mosquito pwfile
+                            console.log('sunning mosquitto reg');
                             const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
                             mosquitto.stdout.on('data', (data) => {
                                 console.log(`stdout: ${data}`);
