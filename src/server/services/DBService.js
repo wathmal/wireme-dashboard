@@ -101,6 +101,9 @@ class DBService {
                             // console.log('running mosquitto reg');
                             // const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
                             //
+                            // mosquitto.on('error', (err) => {
+                            //     console.log('Failed to start child process.: '+err);
+                            // });
                             // mosquitto.on('close', (code) => {
                             //     console.log(`child process exited with code ${code}`);
                             // });
