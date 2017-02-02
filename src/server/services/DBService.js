@@ -6,7 +6,7 @@ import Mysql from 'mysql2';
 import config from './../config';
 import Promise from 'promise';
 import Bcrypt from 'bcrypt';
-
+const spawn = require('child_process').spawn;
 let pool;
 
 class DBService {
@@ -96,6 +96,11 @@ class DBService {
                                         fulfill(this.responseGenerator(201));
                                     }
                                 });
+
+                            //run the bash command to add new user to mosquito pwfile
+                            spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass], function (data) {
+                                console.log('added usr to mqtt'+data);
+                            });
 
                         }
                         else {
