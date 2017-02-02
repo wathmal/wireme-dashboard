@@ -97,20 +97,13 @@ class DBService {
                                     }
                                 });
 
-                            //run the bash command to add new user to mosquito pwfile
-                            console.log('sunning mosquitto reg');
-                            const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
-                            mosquitto.stdout.on('data', (data) => {
-                                console.log(`stdout: ${data}`);
-                            });
-
-                            mosquitto.stderr.on('data', (data) => {
-                                console.log(`stderr: ${data}`);
-                            });
-
-                            mosquitto.on('close', (code) => {
-                                console.log(`child process exited with code ${code}`);
-                            });
+                            // // run the bash command to add new user to mosquito pwfile
+                            // console.log('running mosquitto reg');
+                            // const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
+                            //
+                            // mosquitto.on('close', (code) => {
+                            //     console.log(`child process exited with code ${code}`);
+                            // });
 
                         }
                         else {
