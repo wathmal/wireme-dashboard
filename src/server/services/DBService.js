@@ -275,18 +275,18 @@ class DBService {
 
                                             }
                                             else {
-                                                conn.commit(function(err) {
+                                                conn.commit((err)=>{
                                                     if (err) {
-                                                        conn.rollback(function() {
+                                                        conn.rollback(()=> {
                                                             console.log(err);
                                                             reject(this.responseGenerator(500, 'database transaction commit error', null, err.code));
                                                         });
                                                     }
                                                     console.log('Transaction Complete.');
+                                                    // changed status code from 201 to 200 due to ActionScript constraints
+                                                    fulfill(this.responseGenerator(200, 'added'));
                                                     conn.release();
                                                 });
-                                                // changed status code from 201 to 200 due to ActionScript constraints
-                                                fulfill(this.responseGenerator(200, 'added'));
                                             }
                                         });
                                 }else {
