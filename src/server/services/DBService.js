@@ -6,7 +6,7 @@ import Mysql from 'mysql2';
 import config from './../config';
 import Promise from 'promise';
 import Bcrypt from 'bcrypt';
-
+const spawn = require('child_process').spawn;
 let pool;
 
 class DBService {
@@ -96,6 +96,17 @@ class DBService {
                                         fulfill(this.responseGenerator(201));
                                     }
                                 });
+
+                            // // run the bash command to add new user to mosquito pwfile
+                            // console.log('running mosquitto reg');
+                            // const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
+                            //
+                            // mosquitto.on('error', (err) => {
+                            //     console.log('Failed to start child process.: '+err);
+                            // });
+                            // mosquitto.on('close', (code) => {
+                            //     console.log(`child process exited with code ${code}`);
+                            // });
 
                         }
                         else {
