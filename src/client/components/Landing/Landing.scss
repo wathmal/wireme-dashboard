@@ -1,0 +1,53 @@
+.landingSection{
+  //background-color: #3F51B5;
+  background-color: #0097A7;
+  color: white;
+  text-align: center;
+  padding: 30px;
+
+  .heading{
+    text-transform: uppercase;
+  }
+
+}
+
+
+
+.subtext{
+  font-size: 2em;
+}
+.textSlider{
+  margin-top: 45px;
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.divider{
+  width:5px;
+  height:auto;
+  display:inline-block;
+}
+
+.landingNav{
+  text-transform: uppercase;
+  text-align: right;
+
+  li{
+    display: inline;
+  }
+}
+
+.featuresSection{
+  padding: 30px;
+
+}
+
+.contactUs{
+  background-color: #222;
+  background-image: url(https://blackrockdigital.github.io/startbootstrap-agency/img/map-image.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 30px;
+}

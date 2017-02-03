@@ -12,6 +12,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
 import QuickStart from './components/QuickStart/QuickStart';
+import Landing from './components/Landing/Landing';
 
 const app = document.getElementById('app');
 
@@ -24,6 +25,7 @@ ReactDOM.render(
             <Route path="register" component={Register}/>
             <Route path="profile" component={Profile}/>
             <Route path="quickstart" component={QuickStart}/>
+            <Route path="landing" component={Landing}/>
         </Route>
     </Router>, app);
 
