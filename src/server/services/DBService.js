@@ -6,7 +6,7 @@ import Mysql from 'mysql2';
 import config from './../config';
 import Promise from 'promise';
 import Bcrypt from 'bcrypt';
-
+const spawn = require('child_process').spawn;
 let pool;
 
 class DBService {
@@ -96,6 +96,17 @@ class DBService {
                                         fulfill(this.responseGenerator(201));
                                     }
                                 });
+
+                            // // run the bash command to add new user to mosquito pwfile
+                            // console.log('running mosquitto reg');
+                            // const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
+                            //
+                            // mosquitto.on('error', (err) => {
+                            //     console.log('Failed to start child process.: '+err);
+                            // });
+                            // mosquitto.on('close', (code) => {
+                            //     console.log(`child process exited with code ${code}`);
+                            // });
 
                         }
                         else {
@@ -245,46 +256,65 @@ class DBService {
                 if (err) {
                     console.log(err);
                     reject(this.responseGenerator(500, 'database error', null, err.code));
-                }
-                else {
-                    conn.execute('DELETE FROM `user_widget` WHERE `user_id` = (SELECT id FROM user WHERE username = ? LIMIT 1)', [username],
-                        (err, results, fields)=> {
+                }else{
 
-                            if (!err) {
-                                // generate insert values query
-                                let subQuery = "";
-                                let preparedParams = [];
-                                for (let i in widgetsAry) {
-                                    (i != 0) ? subQuery += ', ' : subQuery += '';
-                                    subQuery += "((SELECT id FROM user WHERE username= ? ), (SELECT id FROM widget WHERE type= ? ), ? , ? )";
-                                    preparedParams.push(username, widgetsAry[i].type, widgetsAry[i].topic, widgetsAry[i].title);
-                                }
+                    conn.beginTransaction((err)=> {
+                        if (err) {
+                            reject(this.responseGenerator(500, 'transaction begin error', null, err.code));
+                        }
+                        conn.execute('DELETE FROM `user_widget` WHERE `user_id` = (SELECT id FROM user WHERE username = ? LIMIT 1)', [username],
+                            (err, results, fields)=> {
+                                if(!err){
 
-                                // exec
-                                conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values " + subQuery, preparedParams,
-                                    (err, results, fields)=> {
+                                    // generate insert values query
+                                    let subQuery = "";
+                                    let preparedParams = [];
+                                    for (let i in widgetsAry) {
+                                        (i != 0) ? subQuery += ', ' : subQuery += '';
+                                        subQuery += "((SELECT id FROM user WHERE username= ? ), (SELECT id FROM widget WHERE type= ? ), ? , ? )";
+                                        preparedParams.push(username, widgetsAry[i].type, widgetsAry[i].topic, widgetsAry[i].title);
+                                    }
+
+                                    conn.execute("INSERT INTO user_widget (user_id, widget_id, topic, title) values " + subQuery, preparedParams,
+                                        (err, results, fields)=> {
+
+                                            if (err) {
+                                                conn.rollback(()=> {
+                                                    console.log(err);
+                                                    reject(this.responseGenerator(500, 'database write error rollback', null, err.code));
+                                                })
+
+                                            }
+                                            else {
+                                                conn.commit((err)=>{
+                                                    if (err) {
+                                                        conn.rollback(()=> {
+                                                            console.log(err);
+                                                            reject(this.responseGenerator(500, 'database transaction commit error', null, err.code));
+                                                        });
+                                                    }
+                                                    console.log('Transaction Complete.');
+                                                    // changed status code from 201 to 200 due to ActionScript constraints
+                                                    fulfill(this.responseGenerator(200, 'added'));
+                                                    conn.release();
+                                                });
+                                            }
+                                        });
+                                }else {
+                                    conn.rollback(()=> {
                                         conn.release();
-
-                                        if (err) {
-                                            console.log(err);
-                                            reject(this.responseGenerator(500, 'database error', null, err.code));
-                                        }
-                                        else {
-                                            // changed status code from 201 to 200 due to ActionScript constraints
-                                            fulfill(this.responseGenerator(200, 'added'));
-                                        }
+                                        console.log(err);
+                                        reject(this.responseGenerator(500, 'database delete error rollback', null, err.code));
                                     });
-                            }
-                            else {
-                                conn.release();
-                                console.log(err);
-                                reject(this.responseGenerator(500, 'database error', null, err.code));
-                            }
-                        })
+                                }
+                            });
+                    });
+
                 }
+
             });
 
-        })
+        });
     }
 
     getWidgets(username) {
@@ -332,6 +362,7 @@ class DBService {
 
         return res;
     }
+
 }
 
 export default new DBService();
