@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "c3": "c3js-chart#^0.4.11"
+    "c3": "c3js-chart#^0.4.11",
+    "font-awesome": "^4.7.0"
   }
 }

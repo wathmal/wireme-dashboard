@@ -8,6 +8,7 @@
 * */
 
 import store from 'store';
+import Crypto from 'crypto-js';
 
 class ResourceManager{
     constructor(){
@@ -23,6 +24,30 @@ class ResourceManager{
 
     setUser(user){
         store.set('user', user);
+    }
+
+    /*
+    * TODO: encrypt password
+    * */
+    setPWD(pwd){
+        const ency= Crypto.AES.encrypt(pwd, store.get('token'));
+        const cipher= ency.toString();
+        //console.log(cipher);
+        store.set('pass', cipher);
+    }
+
+    getPWD(){
+        const pass= store.get('pass');
+
+        if(pass){
+            const bytes  = Crypto.AES.decrypt(pass, store.get('token'));
+            const plaintext = bytes.toString(Crypto.enc.Utf8);
+            //console.log(plaintext);
+            return plaintext;
+        }
+        else{
+            return null;
+        }
     }
 
     getUsername(){

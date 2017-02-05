@@ -93,20 +93,26 @@ class DBService {
                                         reject(this.responseGenerator(500, 'database error', null, err.code));
                                     }
                                     else {
+
+                                        /*
+                                        * add new use to mosquitto
+                                        * run the bash command to add new user to mosquito pwfile
+                                        * */
+                                        console.log('running mosquitto reg for new user: '+ userObj.username);
+                                        const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
+
+                                        mosquitto.on('error', (err) => {
+                                            console.log('failed to start child process.: '+err);
+                                        });
+                                        mosquitto.on('close', (code) => {
+                                            console.log(`child process exited with code ${code}`);
+                                        });
+
                                         fulfill(this.responseGenerator(201));
                                     }
                                 });
 
-                            // // run the bash command to add new user to mosquito pwfile
-                            // console.log('running mosquitto reg');
-                            // const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
-                            //
-                            // mosquitto.on('error', (err) => {
-                            //     console.log('Failed to start child process.: '+err);
-                            // });
-                            // mosquitto.on('close', (code) => {
-                            //     console.log(`child process exited with code ${code}`);
-                            // });
+
 
                         }
                         else {

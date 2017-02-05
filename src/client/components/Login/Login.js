@@ -33,7 +33,7 @@ class Login extends React.Component {
             console.log(res);
             this.setState({error: ""});
             // redirect on success
-            window.location = '/';
+            window.location = '/dashboard';
         }, err=>{
             console.log(err);
             this.setState({error: "something went wrong. pls try again"});
@@ -50,8 +50,9 @@ class Login extends React.Component {
                     <Card style={{width: '100%'}}>
                         <CardText>
                             <div>
-                                <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                <img src="images/wireme-text-logo-black.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width: '50%'}}/>
                             </div>
+                            <br/>
                             <section>
                                 <Input type='text' error={this.state.error} label='username' icon='perm_identity' value={this.state.username} onChange={this.handleChange.bind(this, 'username')} />
                                 <Input type='password' error={this.state.error} label='password' icon='vpn_key' value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')} />

@@ -13,12 +13,8 @@ import {Link} from 'react-toolbox/lib/link'
 import Header from './../Header/Header';
 import AuthService from './../../services/AuthService';
 import RM from './../../services/ResourceManager';
+import style from './Profile.scss';
 
-const table_model = {
-    title: {type: String},
-    type: {type: String},
-    topic: {type: String}
-};
 
 class Profile extends React.Component {
 
@@ -41,7 +37,7 @@ class Profile extends React.Component {
             blank_old_pass: '',
             blank_pass: '',
             btnTxt: 'edit profile',
-            visible: true,
+            visible: false,
             visible2: false,
             btn_enabled: false,
             check_box:false,
@@ -119,55 +115,95 @@ class Profile extends React.Component {
 
     render() {
 
+        const table_model = {
+            title: {type: String},
+            type: {type: String},
+            topic: {type: String}
+        };
+
         return (
             <div>
                 <Header title="profile"/>
 
-                <div className="col-md-8 col-md-offset-2 col-xs-12 form-group" style={{paddingTop: 20}}>
-                    <div>
-                        <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt=""
+                <div className="container">
+                    <div className="row" style={{paddingTop: 40}}>
+                        <div className="col-md-4 col-md-offset-4 col-xs-12 form-group">
+                            {/*<div>
+                             <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt=""
                              className="img-responsive"
                              style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
-                    </div>
+                             </div>*/}
 
-                    <div className="form-group-lg">
-                        <section >
-                            <Input type='text' error={this.state.error+this.state.error+this.state.blank_name}
-                                   label='name'
-                                   value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>
-                            <Input type='text' error={this.state.error+this.state.blank_user} label='username'
-                                   value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
-                            <label style={{fontSize:'12px', color:'#757575'}} >user widget details</label>
-                            <Table
-                                model={table_model}
-                                source={this.state.widgets}
-                                selectable={this.state.check_box}
-                            />
-                            <div style={{width:'130px'}}>
-                                <Link active={this.state.visible} onClick={this.showForm} label="change password" style={{ fontSize:'14px' , textDecoration: 'none' }} />
+                            <div className="form-group-lg">
+                                <section >
+                                    <Input type='text' error={this.state.error+this.state.error+this.state.blank_name}
+                                           label='name'
+                                           value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>
+                                    <Input type='text' error={this.state.error+this.state.blank_user} label='username'
+                                           value={this.state.username} onChange={this.handleChange.bind(this, 'username')}/>
+
+                                    <div className="text-center">
+                                        <Button onClick={this.showForm} label="change password" disabled={this.state.visible} raised />
+
+                                     </div>
+
+                                    <div hidden={!this.state.visible}>
+                                        <Input disabled={!this.state.visible} type='password' error={this.state.error+this.state.blank_pass}
+                                               label='old password'
+                                               value={this.state.old_pwd} onChange={this.handleChange.bind(this, 'old_pwd')}/>
+                                        <Input disabled={!this.state.visible} type='password'
+                                               error={this.state.miss_match_pwd+this.state.error+this.state.blank_pass}
+                                               label='new password'
+                                               value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')}/>
+                                        <Input disabled={!this.state.visible} type='password' error={this.state.miss_match_pwd+this.state.error}
+                                               label='confirm new password'
+                                               value={this.state.conf_pwd} onChange={this.handleChange.bind(this, 'conf_pwd')}/>
+                                    </div>
+                                </section>
+                                <div className="text-center">
+                                    <br/>
+                                    <Button icon="update" label='update' raised
+                                            onClick={this.onClickUpdate}
+                                            style={{backgroundColor: '#0d7c82', color:'#ffffff'}}/>
+                                </div>
                             </div>
 
-                        </section>
-                        <section hidden={this.state.visible}>
-                            <Input type='password' error={this.state.error+this.state.blank_pass}
-                                   label='old password'
-                                   value={this.state.old_pwd} onChange={this.handleChange.bind(this, 'old_pwd')}/>
-                            <Input type='password'
-                                   error={this.state.miss_match_pwd+this.state.error+this.state.blank_pass}
-                                   label='new password'
-                                   value={this.state.pwd} onChange={this.handleChange.bind(this, 'pwd')}/>
-                            <Input type='password' error={this.state.miss_match_pwd+this.state.error}
-                                   label='confirm new password'
-                                   value={this.state.conf_pwd} onChange={this.handleChange.bind(this, 'conf_pwd')}/>
-                        </section>
-                        <div  style={{marginLeft: '40%', paddingTop: 20}}>
-                            <Button icon="update" label='update' raised
-                                    onClick={this.onClickUpdate}
-                                    style={{borderRadius: 10,backgroundColor: '#0d7c82', color:'#ffffff'}}/>
                         </div>
+                        {/*<div className="col-md-4">
+
+
+
+                        </div>
+                        <div className="col-md-12 text-center">
+
+                        </div>*/}
                     </div>
 
+
+                    <div className="row" style={{paddingTop: 20}}>
+                        <div className="col-md-6 col-md-offset-3">
+
+
+                            <h3 className="text-uppercase text-center" style={{color:'#757575'}} >user widget details</h3>
+
+
+
+                            <div className="well well-lg">
+
+                                <Table className={style.table}
+                                       model={table_model}
+                                       source={this.state.widgets}
+                                       selectable={this.state.check_box}
+                                />
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
         );

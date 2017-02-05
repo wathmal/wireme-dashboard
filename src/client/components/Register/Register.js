@@ -89,10 +89,9 @@ class Register extends React.Component {
                     <Card style={{width: '100%'}}>
                         <CardText>
                             <div>
-                                <img src="http://wireme.projects.mrt.ac.lk/images/wireme_logo.png" alt=""
-                                     className="img-responsive"
-                                     style={{marginLeft: 'auto', marginRight:'auto', padding: 10}}/>
+                                <img src="images/wireme-text-logo-black.png" alt="" className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width: '50%'}}/>
                             </div>
+                            <br/>
                             <section>
                                 <Input type='text' error={this.state.error+this.state.blank_name} label='name'
                                        value={this.state.name} onChange={this.handleChange.bind(this, 'name')}/>

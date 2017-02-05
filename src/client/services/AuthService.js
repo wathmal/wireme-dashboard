@@ -37,6 +37,7 @@ class AuthService{
                     this.setToken(data.token);
                     // get complete user object from login endpoint
                     RM.setUser({username: username, name: data.name});
+                    RM.setPWD(pass);
                     fulfill(data);
                 },
                 error: (xhr, status, err) => {
@@ -146,6 +147,7 @@ class AuthService{
         else{
             // keep colors
             store.remove('token');
+            store.remove('pass');
         }
         window.location = '/login';
     }

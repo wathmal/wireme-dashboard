@@ -20,12 +20,12 @@ const app = document.getElementById('app');
 ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App}>
-            <IndexRoute component={Dashboard}/>
+            <IndexRoute component={Landing}/>
             <Route path="login" component={Login}/>
             <Route path="register" component={Register}/>
             <Route path="profile" component={Profile}/>
             <Route path="quickstart" component={QuickStart}/>
-            <Route path="landing" component={Landing}/>
+            <Route path="dashboard" component={Dashboard}/>
         </Route>
     </Router>, app);
 

@@ -5,6 +5,7 @@
 import React, {PropTypes} from 'react';
 import style from './Landing.scss';
 import {Button} from 'react-toolbox/lib/button';
+import RM from './../../services/ResourceManager';
 
 
 class Landing extends React.Component {
@@ -25,12 +26,22 @@ class Landing extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6">
-                                <img className="img-responsive" style={{width: 100, padding: 10}} src="/images/wireme.png" alt=""/>
+                                <img className="img-responsive" style={{width: 100, padding: 10}} src="/images/wireme-text-logo.png" alt=""/>
                             </div>
                             <div className="col-md-6">
                                 <ul className={style.landingNav}>
-                                    <li><Button href='/login' flat style={{color: 'white'}}>login</Button></li>
-                                    <li><Button href='/register' flat style={{color: 'white'}}>register</Button></li>
+                                    {(RM.getUsername()) ?
+                                        <li><Button href='/profile' icon='person' flat style={{color: 'white'}}>{RM.getUsername()}</Button></li>
+                                        :
+                                        <li><Button href='/login' flat style={{color: 'white'}}>login</Button></li>
+
+                                    }
+                                    {(RM.getUsername()) ?
+                                        <li><Button href='/dashboard' flat style={{color: 'white'}}>dashboard</Button></li>
+                                        :
+                                        <li><Button href='/register' flat style={{color: 'white'}}>register</Button></li>
+
+                                    }
                                     <li><Button href='/quickstart' flat style={{color: 'white'}}>quick start</Button></li>
                                 </ul>
                             </div>
@@ -58,7 +69,7 @@ class Landing extends React.Component {
                         <div className="row">
 
                             <div className="col-md-6 col-md-offset-3" style={{paddingTop: 10}}>
-                                <img className="img-responsive" src="images/tutorial/overview.png" alt=""/>
+                                <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
                             </div>
 
                         </div>
@@ -69,18 +80,24 @@ class Landing extends React.Component {
 
                 <div className={style.featuresSection}>
                     <div className="container">
-                        <h3 style={{textAlign: 'center', textTransform: 'uppercase'}}>FEATURES</h3>
+                        <h3 className={style.subHeading}>FEATURES</h3>
 
 
                         <div style={{paddingTop: 20}}>
                             <div className="row">
                                 <div className="col-md-4">
+                                    <img className="img-responsive" src="images/landing/vptool-mac.png" alt=""/>
+                                    <br/>
                                     <div><code>scratch</code> based interactive visual programming tool</div>
                                 </div>
                                 <div className="col-md-4">
+                                    <img className="img-responsive" src="https://placehold.it/1366x862" alt=""/>
+                                    <br/>
                                     <div>easily deployable gadget kit with a centralized control unit</div>
                                 </div>
                                 <div className="col-md-4">
+                                    <img className="img-responsive" src="images/landing/dashboard-mac.png" alt=""/>
+                                    <br/>
                                     <div>web based dashboard to control it from anywhere</div>
                                 </div>
 
@@ -92,9 +109,42 @@ class Landing extends React.Component {
 
                 <div className={style.contactUs}>
                     <div className="container">
-                        <h3 style={{textAlign: 'center', textTransform: 'uppercase'}}>GET IN TOUCH</h3>
+                        <h3 className={style.subHeading}>GET IN TOUCH</h3>
 
+                        <div className="row" style={{paddingTop: 50}}>
+
+                                <div className="col-md-6">
+                                    <form>
+                                        <div className="form-group">
+                                            <input className="form-control input-lg" name="name" type="text" placeholder="name" />
+                                        </div>
+                                        <div className="form-group">
+                                            <input className="form-control input-lg" name="email" type="text" placeholder="email" />
+                                        </div>
+                                        <div className="form-group">
+                                            <textarea className="form-control input-lg" name="message" rows="3" placeholder="your message" />
+
+                                        </div>
+                                        <div style={{textAlign: 'center'}}>
+
+                                            <Button raised>send a message</Button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+
+                                <div className="col-md-6 text-center" style={{paddingTop: 40}}>
+                                    <div>
+                                        <a href="#" className={style.link} style={{backgroundColor: '#3B5998', color: 'white'}} target="_parent"><span className="fa fa-facebook" /></a>
+                                        <a href="#" className={style.link} style={{backgroundColor: '#00ACEE', color: 'white'}} target="_parent"><span className="fa fa-twitter" /></a>
+                                        <a href="#" className={style.link} style={{backgroundColor: '#b31217', color: 'white'}} target="_parent"><span className="fa fa-youtube" /></a>
+                                    </div>
+                                </div>
+
+                        </div>
                     </div>
+
 
                 </div>
             </div>

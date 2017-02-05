@@ -2,13 +2,13 @@
  * Created by wathmal on 12/1/16.
  */
 import MQTT from 'mqtt';
-
+import RM from './ResourceManager'
 let client;
 
 class MQTTService{
-    constructor(){
+    constructor(user, pass){
         if(!client) {
-            client = MQTT.connect('ws://wireme.projects.mrt.ac.lk', {port: 8883, username:'test', password:'test123'});
+            client = MQTT.connect('ws://wireme.projects.mrt.ac.lk', {port: 8883, username:user, password:pass});
             // client = MQTT.connect('mqtt://wireme.projects.mrt.ac.lk', {port: 8000});
             // client = MQTT.connect('mqtt://test.mosquitto.org');
             client.on('connect', ()=>{
@@ -16,7 +16,7 @@ class MQTTService{
             });
 
             client.on('error', ()=>{
-                console.log('error');
+                console.log('mqtt not connected');
             });
         }
 
@@ -35,4 +35,4 @@ class MQTTService{
 
 }
 
-export default new MQTTService();
+export default new MQTTService(RM.getUsername(), RM.getPWD());
