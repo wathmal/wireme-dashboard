@@ -57,10 +57,8 @@ class QuickStart extends React.Component {
 
 
                 <div className="col-md-10" style={{paddingTop: 20}}>
-                    <section hidden={this.state.visible}><Overview /></section>
                     <section hidden={this.state.visible1}><First /></section>
                     <section hidden={this.state.visible2}><Second /></section>
-                    <section hidden={this.state.visible3}><Third /></section>
                 </div>
             </div>
         )
