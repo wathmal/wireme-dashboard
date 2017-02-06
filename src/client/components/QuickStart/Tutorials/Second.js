@@ -26,12 +26,12 @@ class Second extends React.Component {
 
                     <div className="row">
                         <h4 style={{padding: 15}}>Save and Load Projects</h4>
-                        <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/add_new.png" alt="overview image"
+                        <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/load_project.png" alt="overview image"
                              className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width:600, height:'auto'}}/>
                     </div>
                     <div className="row">
                         <h4 style={{padding: 15}}>Language Support</h4>
-                        <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/overview.png" alt="overview image"
+                        <img src="http://wireme.projects.mrt.ac.lk/images/tutorial/sinhala.png" alt="overview image"
                              className="img-responsive" style={{marginLeft: 'auto', marginRight:'auto', padding: 10, width:600, height:'auto'}}/>
                     </div>
                     <div className="row">
