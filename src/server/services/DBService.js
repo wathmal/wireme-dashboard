@@ -94,20 +94,7 @@ class DBService {
                                     }
                                     else {
 
-                                        /*
-                                        * add new use to mosquitto
-                                        * run the bash command to add new user to mosquito pwfile
-                                        * */
-                                        console.log('running mosquitto reg for new user: '+ userObj.username);
-                                        const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',userObj.username,userObj.pass]);
-
-                                        mosquitto.on('error', (err) => {
-                                            console.log('failed to start child process.: '+err);
-                                        });
-                                        mosquitto.on('close', (code) => {
-                                            console.log(`child process exited with code ${code}`);
-                                        });
-
+                                        this.registerMosquittoUser(userObj.username, userObj.pass);
                                         fulfill(this.responseGenerator(201));
                                     }
                                 });
@@ -171,6 +158,7 @@ class DBService {
                                                             reject(this.responseGenerator(500, 'database error', null, err.code));
                                                         }
                                                         else {
+                                                            this.registerMosquittoUser(userObj.username, userObj.pass);
                                                             fulfill(this.responseGenerator(201));
                                                         }
                                                     });
@@ -348,6 +336,30 @@ class DBService {
             });
 
         });
+    }
+
+    registerMosquittoUser(username, pass){
+        /*
+         * add new user to mosquitto
+         * run the bash command to add new user to mosquito pwfile
+         * */
+        console.log('running mosquitto reg for new user: '+ username);
+        const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',username, pass]);
+
+        mosquitto.stdout.on('data', (data) => {
+            console.log(`stdout: ${data}`);
+        });
+
+        mosquitto.stderr.on('data', (data) => {
+            console.log(`stderr: ${data}`);
+        });
+        mosquitto.on('error', (err) => {
+            console.log('failed to start child process.: '+err);
+        });
+        mosquitto.on('close', (code) => {
+            console.log(`child process exited with code ${code}`);
+        });
+
     }
 
     // function to generate response to be sent as API resp.
