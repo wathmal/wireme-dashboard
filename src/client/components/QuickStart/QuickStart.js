@@ -22,8 +22,8 @@ class QuickStart extends React.Component {
         this.showForm2 = this.showForm2.bind(this);
         // this.showForm3 = this.showForm3.bind(this);
         this.state = {
-            visible: false,
-            visible1: true,
+            visible: true,
+            visible1: false,
             // visible2: true,
             // visible3: true,
         }
