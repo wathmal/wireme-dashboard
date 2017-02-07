@@ -1,0 +1,50 @@
+.tutorial {
+  padding-top: 20px;
+
+  h1{
+    font-family: Norwester;
+    text-transform: uppercase;
+  }
+
+  h4{
+    padding-bottom: 20px;
+    font-family: Norwester;
+    text-transform: uppercase;
+    color: #3a3a3a;
+  }
+
+  p{
+    padding-bottom: 15px;
+    font-size: 1em;
+  }
+
+  img{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
+.tutorialSpy{
+  li{
+    text-transform: uppercase;
+    font-size: 0.85em;
+  }
+}
+
+.section{
+  padding-bottom: 30px;
+}
+
+.codeBlock{
+  padding-bottom: 15px;
+}
+.blockContainer{
+  border: 1px solid #eaeaea;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.blockDescription{
+  font-size: 1em;
+}

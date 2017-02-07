@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Profile from './components/Profile/Profile';
-import QuickStart from './components/QuickStart/QuickStart';
+import QuickStart from './components/TutorialPages/QuickStart';
 import Landing from './components/Landing/Landing';
 
 const app = document.getElementById('app');

@@ -5,6 +5,7 @@
 import React, {PropTypes} from 'react';
 import {Button} from 'react-toolbox/lib/button';
 import { Card, CardText, CardActions, CardMedia, CardTitle } from 'react-toolbox/lib/card';
+import Link from 'react-toolbox/lib/link';
 
 class First extends React.Component {
 
@@ -19,16 +20,24 @@ class First extends React.Component {
     render() {
 
         return (
-            <div className="text-center">
-                <div style={{padding: 20}}><h2>Getting Started</h2></div>
-                <h5>Think Drag and Drop. No Coding</h5>
+            <div className="tutorial">
+                <div className="text-center">
+                    <h1 className="font-norwester text-uppercase">getting started</h1>
+                    {/*<div style={{padding: 20}}><h2>Getting Started</h2></div>*/}
+                    <h5 className="text-lowercase"><code>Think. Drag and Drop. No Coding</code></h5>
+                </div>
 
-                <div className="row " style={{padding: 20}}>
+                <br/><br/>
+                <h4 className="font-norwester text-uppercase">1. downloading and installation</h4>
+                <section>
+                    <p>Download WireMe IoT Hub for Windows from <a href="https://goo.gl/ASRPec" target='_blank'>this link</a> or below button.</p>
+                    <p>once downloaded, Extract the downloaded zip file. Then run the <code>WireMe.exe</code> from your extracted location and allow networking in your firewall if prompted.</p>
+
+                    <Button icon="cloud_download" label='download' href="https://goo.gl/ASRPec" target='_blank' raised style={{backgroundColor: '#0d7c82', color:'#ffffff'}}/>
+                </section>
+                {/*<div className="row " style={{padding: 20}}>
                     <div className="col-md-6">
-                        <h4 style={{padding: 15}}>Download WireMe IoT Hub for Windows</h4>
-                        <Button icon="cloud_download" label='download'
-                                onclick={()=>{window.open('https://goo.gl/ASRPec')}} raised
-                                style={{borderRadius: 20,backgroundColor: '#0d7c82', color:'#ffffff'}}/>
+
                     </div>
                     <div className="col-md-6">
                         <h4 style={{padding: 15}}>Installation Guide</h4>
@@ -37,7 +46,7 @@ class First extends React.Component {
                             networking in your firewall if prompted.
                         </p>
                     </div>
-                </div>
+                </div>*/}
 
                 <div className="row">
                     <h4 style={{padding: 15}}>Get to know the IoT Hub</h4>
