@@ -20,10 +20,17 @@ class Tutorial extends React.Component {
     };
 
     componentDidMount(){
+        // parse scratch blocks
         scratchblocks.renderMatching('pre.blocks');
 
-        $('body').css('position', 'relative');
-        $('body').scrollspy({ target: '#tutorialSpy', offset: 200 });
+        // fabcybox images
+        $(".fancybox").fancybox({
+            openEffect : 'none',
+            closeEffect	: 'none'
+        });
+
+        $("body").css('position', 'relative');
+        $("body").scrollspy({ target: '#tutorialSpy', offset: 200 });
     }
 
     render() {
@@ -47,7 +54,7 @@ class Tutorial extends React.Component {
                         <h5><code>{this.props.subtext}</code></h5>
                     </div>
                     <div className="row">
-                        <div className="col-md-3">
+                        <div className="col-md-3 hidden-sm hidden-xs">
                             <nav id="tutorialSpy" className={style.tutorialSpy} style={{paddingTop: 40}}>
                                 <ul className="nav" style={{position: 'fixed', width: '18%', border: '1px solid #9E9E9E', borderRadius: 10}}>
                                     
@@ -106,6 +113,7 @@ class CodeBlock extends React.Component {
 
     };
 
+
     render(){
 
         return(
@@ -121,7 +129,9 @@ class CodeBlock extends React.Component {
                                 {(this.props.code)?
                                     <pre className="blocks">{this.props.code}</pre>
                                     :
-                                    <img className="img-responsive" src={this.props.image} alt=""/>
+                                    <a className="fancybox" href={this.props.image}>
+                                        <img className="img-responsive" src={this.props.image} alt=""/>
+                                    </a>
                                 }
                             </div>
                             <div className="col-md-6">

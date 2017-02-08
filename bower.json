@@ -19,6 +19,7 @@
     "bootstrap": "^3.3.7",
     "c3": "c3js-chart#^0.4.11",
     "font-awesome": "^4.7.0",
-    "scratchblocks": "https://github.com/tjvr/scratchblocks.git#master"
+    "scratchblocks": "https://github.com/tjvr/scratchblocks.git#master",
+    "fancybox": "^2.1.6"
   }
 }
