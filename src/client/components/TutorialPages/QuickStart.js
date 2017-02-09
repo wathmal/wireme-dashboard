@@ -65,27 +65,27 @@ class QuickStart extends React.Component {
                         <table className="table table-bordered">
                             <tbody>
                             <tr>
-                                <td><b>1. stage&nbsp;pane</b></td>
+                                <td style={{width: '20%'}}><b>1. stage pane</b></td>
                                 <td>this is where you can place your widgets. the widgets you select from <code>widgets area</code> are shown here.</td>
                             </tr>
                             <tr>
-                                <td><b>2. widgets&nbsp;area</b></td>
+                                <td><b>2. widgets area</b></td>
                                 <td>all your selected widgets are list under here. you can select new widgets by "new sprite" button on top left. when u want to select individual widgets this is where you should come.</td>
                             </tr>
                             <tr>
-                                <td><b>3. Block&nbsp;Palette</b></td>
+                                <td><b>3. Block Palette</b></td>
                                 <td>The block palette allows you to drag blocks into the <code>Scripts Area</code> to built your own program. When you drag a block from the <code>Block Palette</code>, a copy of it follows the mouse until you "drop" it where you need it. There are 4 sections of blocks in the block palette.</td>
                             </tr>
                             <tr>
-                                <td><b>4. Scripts&nbsp;Area</b></td>
+                                <td><b>4. Scripts Area</b></td>
                                 <td>Blocks from the <code>Block Palette</code> are dragged into the Scripts Area. According to the blocks dropped into this area your logic will be generated.</td>
                             </tr>
                             <tr>
-                                <td><b>5. code&nbsp;pane</b></td>
+                                <td><b>5. code pane</b></td>
                                 <td>the generated code of your program is shown here. when you add more blocks to <code>scripts area</code> this code section will automatically get updated.</td>
                             </tr>
                             <tr>
-                                <td><b>6. serial&nbsp;monitor</b></td>
+                                <td><b>6. serial monitor</b></td>
                                 <td>this section is for advanced users. those users can communicate with <b>wireme nemeis</b> through serial interface once its connected to IOT hub. you can use <b>nodemcu</b> firmware API and commands in here.</td>
                             </tr>
                             </tbody>
