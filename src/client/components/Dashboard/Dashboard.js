@@ -4,7 +4,7 @@
 
 import React, {PropTypes} from 'react';
 import Header from './../Header/Header';
-
+import StatusIndicator from './StatusIndicator/StatusIndicator';
 import WidgetBuilder from './../WidgetBuilder/WidgetBuilder';
 import MainEmitter from './../../services/MainEmitter';
 import MQTTService from './../../services/MQTTService';
@@ -43,7 +43,7 @@ class Dashboard extends React.Component{
                     this.setState({widgets: res.data});
 
                     // generate MQTT subscriber array
-                    let topicArray = [];
+                    let topicArray = [RM.getUsername() +'/alive'];
                     for (let n in this.state.widgets) {
                         topicArray.push(RM.getUsername() + '/' + this.state.widgets[n].topic);
                     }
@@ -94,6 +94,7 @@ class Dashboard extends React.Component{
         return(
             <div>
                 <Header title="dashboard" />
+                <StatusIndicator />
 
                 <WidgetBuilder widgets={this.state.widgets} />
             </div>
