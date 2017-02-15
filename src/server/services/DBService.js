@@ -349,44 +349,47 @@ class DBService {
             });
             deleteMosquitto.on('close', (code) => {
                 console.log(`deleting user from mosquitto succeeded. exit code ${code}`);
+                this.registerMosquittoUser(username, pass);
             });
         }
-        /*
-         * add new user to mosquitto
-         * run the bash command to add new user to mosquito pwfile
-         * */
-        console.log('running mosquitto reg for new user: '+ username);
-        const mosquitto= spawn('mosquitto_passwd',['-b','/etc/mosquitto/pwfile',username, pass]);
-
-        mosquitto.stdout.on('data', (data) => {
-            console.log(`stdout: ${data}`);
-        });
-
-        mosquitto.stderr.on('data', (data) => {
-            console.log(`stderr: ${data}`);
-        });
-        mosquitto.on('error', (err) => {
-            console.log(`failed add new user. ${username} to mosquitto: `+err);
-        });
-        mosquitto.on('close', (code) => {
-            console.log(`adding user process exited with code ${code}`);
-
+        else {
             /*
-            * reload mosquitto server with conf file.
-            * */
-            const reloadMosquitto = spawn('kill', ['-s', '1', '$(cat /etc/mosquitto/pidfile)'], {shell: true});
+             * add new user to mosquitto
+             * run the bash command to add new user to mosquito pwfile
+             * */
+            console.log('running mosquitto reg for new user: ' + username);
+            const mosquitto = spawn('mosquitto_passwd', ['-b', '/etc/mosquitto/pwfile', username, pass]);
 
-            reloadMosquitto.stderr.on('data', (data) => {
+            mosquitto.stdout.on('data', (data) => {
+                console.log(`stdout: ${data}`);
+            });
+
+            mosquitto.stderr.on('data', (data) => {
                 console.log(`stderr: ${data}`);
             });
-            reloadMosquitto.on('error', (err) => {
-                console.log('failed reloading mosquitto broker: '+err);
+            mosquitto.on('error', (err) => {
+                console.log(`failed add new user. ${username} to mosquitto: ` + err);
             });
+            mosquitto.on('close', (code) => {
+                console.log(`adding user process exited with code ${code}`);
 
-            reloadMosquitto.on('close', (code) => {
-                console.log(`mosquitto broker reloading succeeded. exit code ${code}`);
+                /*
+                 * reload mosquitto server with conf file.
+                 * */
+                const reloadMosquitto = spawn('kill', ['-s', '1', '$(cat /etc/mosquitto/pidfile)'], {shell: true});
+
+                reloadMosquitto.stderr.on('data', (data) => {
+                    console.log(`stderr: ${data}`);
+                });
+                reloadMosquitto.on('error', (err) => {
+                    console.log('failed reloading mosquitto broker: ' + err);
+                });
+
+                reloadMosquitto.on('close', (code) => {
+                    console.log(`mosquitto broker reloading succeeded. exit code ${code}`);
+                });
             });
-        });
+        }
 
     }
 
