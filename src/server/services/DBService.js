@@ -158,7 +158,7 @@ class DBService {
                                                             reject(this.responseGenerator(500, 'database error', null, err.code));
                                                         }
                                                         else {
-                                                            this.registerMosquittoUser(userObj.username, userObj.pass);
+                                                            this.registerMosquittoUser(userObj.username, userObj.pass, true);
                                                             fulfill(this.responseGenerator(201));
                                                         }
                                                     });
@@ -338,7 +338,19 @@ class DBService {
         });
     }
 
-    registerMosquittoUser(username, pass){
+    registerMosquittoUser(username, pass, reset = false){
+
+        if(reset){
+            // delete the current user from passwd file
+
+            const deleteMosquitto = spawn('mosquitto_passwd',['-D','/etc/mosquitto/pwfile',username]);
+            deleteMosquitto.on('error', (err) => {
+                console.log(`failed deleting user ${username} from mosquitto: `+err);
+            });
+            deleteMosquitto.on('close', (err) => {
+                console.log(`deleting user from mosquitto succeeded. exit code ${code}`);
+            });
+        }
         /*
          * add new user to mosquitto
          * run the bash command to add new user to mosquito pwfile
@@ -354,10 +366,26 @@ class DBService {
             console.log(`stderr: ${data}`);
         });
         mosquitto.on('error', (err) => {
-            console.log('failed to start child process.: '+err);
+            console.log(`failed add new user. ${username} to mosquitto: `+err);
         });
         mosquitto.on('close', (code) => {
-            console.log(`child process exited with code ${code}`);
+            console.log(`adding user process exited with code ${code}`);
+
+            /*
+            * reload mosquitto server with conf file.
+            * */
+            const reloadMosquitto = spawn('kill', ['-s', '1', '$(cat /etc/mosquitto/pidfile)'], {shell: true});
+
+            reloadMosquitto.stderr.on('data', (data) => {
+                console.log(`stderr: ${data}`);
+            });
+            reloadMosquitto.on('error', (err) => {
+                console.log('failed reloading mosquitto broker: '+err);
+            });
+
+            reloadMosquitto.on('close', (code) => {
+                console.log(`mosquitto broker reloading succeeded. exit code ${code}`);
+            });
         });
 
     }
