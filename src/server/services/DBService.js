@@ -347,7 +347,7 @@ class DBService {
             deleteMosquitto.on('error', (err) => {
                 console.log(`failed deleting user ${username} from mosquitto: `+err);
             });
-            deleteMosquitto.on('close', (err) => {
+            deleteMosquitto.on('close', (code) => {
                 console.log(`deleting user from mosquitto succeeded. exit code ${code}`);
             });
         }
