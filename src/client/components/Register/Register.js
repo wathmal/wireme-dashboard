@@ -104,7 +104,7 @@ class Register extends React.Component {
                             </section>
                         </CardText>
                         <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>
-                            <Button icon="lock_open" label='register' raised onClick={this.onClickRegister} style={{backgroundColor: '#0d7c82', color:'#ffffff'}}/>
+                            <Button icon="lock_open" label='register' raised onClick={this.onClickRegister}/>
                         </CardActions>
                         <CardText style={{marginLeft: 'auto', marginRight:'auto', textTransform:'uppercase'}}>already have an account? <a href='login'><b>log in</b></a></CardText>
                     </Card>

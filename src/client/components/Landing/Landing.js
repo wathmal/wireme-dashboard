@@ -9,17 +9,29 @@ import RM from './../../services/ResourceManager';
 import { Card, CardText, CardActions, CardMedia, CardTitle} from 'react-toolbox/lib/card';
 import {IconMenu, MenuItem } from 'react-toolbox/lib/menu';
 import AuthService from './../../services/AuthService';
-
+import Slider from 'react-slick';
+import SliderStyle from 'slick-carousel'
 
 class Landing extends React.Component {
 
     constructor() {
         super();
+        this.state = {
+        }
     }
 
     static propTypes = {
         //title: React.PropTypes.string.isRequired
+//<img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
     };
+
+    componentDidMount(){
+        // fabcybox images
+        $(".fancybox").fancybox({
+            openEffect : 'none',
+            closeEffect	: 'none'
+        });
+    }
 
     render() {
 
@@ -33,7 +45,6 @@ class Landing extends React.Component {
                             </div>
                             <div className="col-md-6">
                                 <ul className={style.landingNav}>
-
                                     {(RM.getUsername()) ?
                                         <li><Button href='/dashboard' flat style={{color: 'white',textDecoration: 'none'}}>dashboard</Button></li>
                                         :
@@ -82,7 +93,20 @@ class Landing extends React.Component {
                         <div className="row">
 
                             <div className="col-md-6 col-md-offset-3" style={{paddingTop: 10}}>
-                                <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
+                                <Slider autoplay={true} dots={true} autoplaySpeed={10000}>
+                                    <div>
+                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
+                                    </div>
+                                    <div>
+                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
+                                    </div>
+                                    <div>
+                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
+                                    </div>
+                                    <div>
+                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
+                                    </div>
+                                </Slider>
                             </div>
 
                         </div>
@@ -98,17 +122,23 @@ class Landing extends React.Component {
                         <div style={{paddingTop: 20}}>
                             <div className="row">
                                 <div className="col-md-4">
-                                    <img className="img-responsive" src="images/landing/vptool-mac.png" alt="vp tool"/>
+                                    <a className="fancybox" href="images/landing/vptool-mac.png">
+                                        <img className="img-responsive" src="images/landing/vptool-mac.png" alt=""/>
+                                    </a>
                                     <br/>
                                     <div><code>scratch</code> based interactive visual programming tool</div>
                                 </div>
                                 <div className="col-md-4">
-                                    <img className="img-responsive" src="https://placehold.it/1366x862" alt="nemesis"/>
+                                    <a className="fancybox" href="https://placehold.it/1366x862">
+                                        <img className="img-responsive" src="https://placehold.it/1366x862" alt=""/>
+                                    </a>
                                     <br/>
                                     <div>easily deployable gadget kit with a centralized control unit</div>
                                 </div>
                                 <div className="col-md-4">
-                                    <img className="img-responsive" src="images/landing/dashboard-mac.png" alt="dashboard"/>
+                                    <a className="fancybox" href="images/landing/dashboard-mac.png">
+                                        <img className="img-responsive" src="images/landing/dashboard-mac.png" alt=""/>
+                                    </a>
                                     <br/>
                                     <div>web based dashboard to control it from anywhere</div>
                                 </div>
