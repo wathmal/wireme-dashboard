@@ -145,7 +145,7 @@ class Profile extends React.Component {
                                     <div className="text-center">
                                         <Button onClick={this.showForm} label="change password" disabled={this.state.visible} raised />
 
-                                     </div>
+                                    </div>
 
                                     <div hidden={!this.state.visible}>
                                         <Input disabled={!this.state.visible} type='password' error={this.state.error+this.state.blank_pass}
@@ -170,13 +170,9 @@ class Profile extends React.Component {
 
                         </div>
                         {/*<div className="col-md-4">
-
-
-
-                        </div>
-                        <div className="col-md-12 text-center">
-
-                        </div>*/}
+                         </div>
+                         <div className="col-md-12 text-center">
+                         </div>*/}
                     </div>
 
 
