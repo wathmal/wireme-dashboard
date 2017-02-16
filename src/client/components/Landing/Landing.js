@@ -6,6 +6,9 @@ import React, {PropTypes} from 'react';
 import style from './Landing.scss';
 import {Button} from 'react-toolbox/lib/button';
 import RM from './../../services/ResourceManager';
+import { Card, CardText, CardActions, CardMedia, CardTitle} from 'react-toolbox/lib/card';
+import {IconMenu, MenuItem } from 'react-toolbox/lib/menu';
+import AuthService from './../../services/AuthService';
 
 
 class Landing extends React.Component {
@@ -30,20 +33,30 @@ class Landing extends React.Component {
                             </div>
                             <div className="col-md-6">
                                 <ul className={style.landingNav}>
+
                                     {(RM.getUsername()) ?
-                                        <li><Button href='/profile' icon='person' flat style={{color: 'white'}}>{RM.getUsername()}</Button></li>
+                                        <li><Button href='/dashboard' flat style={{color: 'white',textDecoration: 'none'}}>dashboard</Button></li>
                                         :
-                                        <li><Button href='/login' flat style={{color: 'white'}}>login</Button></li>
+                                        <li><Button href='/register' flat style={{color: 'white',textDecoration: 'none'}}>register</Button></li>
 
                                     }
+                                    <li><Button href='/quickstart' flat style={{color: 'white',textDecoration: 'none'}}>quick start</Button></li>
                                     {(RM.getUsername()) ?
-                                        <li><Button href='/dashboard' flat style={{color: 'white'}}>dashboard</Button></li>
+                                        <li><Button href='/profile' icon='person' flat style={{color: 'white',textDecoration: 'none'}}>{RM.getUsername()}</Button></li>
                                         :
-                                        <li><Button href='/register' flat style={{color: 'white'}}>register</Button></li>
+                                        <li><Button href='/login' flat style={{color: 'white',textDecoration: 'none'}}>login</Button></li>
 
                                     }
-                                    <li><Button href='/quickstart' flat style={{color: 'white'}}>quick start</Button></li>
+                                    {(RM.getUser()) ?
+                                        <li>
+                                            <IconMenu icon='more' position='topRight' menuRipple style={{marginRight: '-1.25rem'}}>
+                                                <MenuItem value='logout' onClick={()=> AuthService.logout(true)} icon='exit_to_app'
+                                                          caption='logout'/>
+                                            </IconMenu></li>
+                                        : null
+                                    }
                                 </ul>
+
                             </div>
                         </div>
 
@@ -61,7 +74,7 @@ class Landing extends React.Component {
                         <div className="row">
 
                             <div className="col-md-12" style={{padding: 20}}>
-                                <Button href='/dashboard' raised>go to dashboard</Button>
+                                <Button href='/dashboard' raised style={{textDecoration:'none'}}>go to dashboard</Button>
                             </div>
 
                         </div>
@@ -82,25 +95,23 @@ class Landing extends React.Component {
                     <div className="container">
                         <h3 className={style.subHeading}>FEATURES</h3>
 
-
                         <div style={{paddingTop: 20}}>
                             <div className="row">
                                 <div className="col-md-4">
-                                    <img className="img-responsive" src="images/landing/vptool-mac.png" alt=""/>
+                                    <img className="img-responsive" src="images/landing/vptool-mac.png" alt="vp tool"/>
                                     <br/>
                                     <div><code>scratch</code> based interactive visual programming tool</div>
                                 </div>
                                 <div className="col-md-4">
-                                    <img className="img-responsive" src="https://placehold.it/1366x862" alt=""/>
+                                    <img className="img-responsive" src="https://placehold.it/1366x862" alt="nemesis"/>
                                     <br/>
                                     <div>easily deployable gadget kit with a centralized control unit</div>
                                 </div>
                                 <div className="col-md-4">
-                                    <img className="img-responsive" src="images/landing/dashboard-mac.png" alt=""/>
+                                    <img className="img-responsive" src="images/landing/dashboard-mac.png" alt="dashboard"/>
                                     <br/>
                                     <div>web based dashboard to control it from anywhere</div>
                                 </div>
-
                             </div>
                         </div>
 
