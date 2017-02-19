@@ -14,6 +14,7 @@ import Gauge from './../../Widgets/Gauge/Gauge';
 import LineGraph from './../../Widgets/LineGraph/LineGraph'
 import ToggleSwitch from './../../Widgets/ToggleSwitch/ToggleSwitch';
 import RollerDial from './../../Widgets/RollerDial/RollerDial';
+import Timer from './../../Widgets/Timer/Timer';
 
 import styles from './WidgetCard.scss';
 
@@ -90,6 +91,9 @@ class WidgetCard extends React.Component {
                 break;
             case "knob":
                 Widget = <RollerDial {...props} />;
+                break;
+            case "timer":
+                Widget = <Timer {...props} />;
                 break;
 
         }
