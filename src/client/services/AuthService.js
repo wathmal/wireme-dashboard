@@ -89,6 +89,7 @@ class AuthService{
                 data: JSON.stringify(user),
                 dataType: 'json',
                 contentType: "application/json",
+                headers: {"x-access-token": this.getToken()},
                 success: (data) => {
                     RM.setUser({username: username, name: name});
                     fulfill(data);
