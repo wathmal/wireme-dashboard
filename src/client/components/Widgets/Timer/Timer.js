@@ -8,7 +8,6 @@ import style from './Timer.scss';
 import MainEmitter from '../../../services/MainEmitter';
 import MQTTService from './../../../services/MQTTService';
 import RM from './../../../services/ResourceManager';
-import secToMin from 'sec-to-min';
 
 class Timer extends React.Component {
 
@@ -121,6 +120,11 @@ class Timer extends React.Component {
         })
     }
 
+    secondsToMinutes(seconds){
+        const mins= Math.floor(seconds/60);
+        return mins+':'+  ("0"+(seconds - mins* 60)).slice(-2);
+    }
+
     render() {
 
         return (
@@ -135,7 +139,7 @@ class Timer extends React.Component {
                                 </div>
                                 :
                                 <div>
-                                    <div className={style.timerText}>{secToMin(this.state.target - this.state.value)}</div>
+                                    <div className={style.timerText}>{this.secondsToMinutes(this.state.target - this.state.value)}</div>
                                     <button className="btn btn-danger btn-sm" onClick={this.handleStop}>OFF</button>
                                 </div>
 
