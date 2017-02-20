@@ -95,8 +95,8 @@ class QuickStart extends React.Component {
 
                         <p>Let's Make a Gadget to Monitor Home Temperature</p>
                         <CodeBlock step={1} title={"configure wifi setup"} code={"start :: #008599 hat \n set wifi [name] and [password] :: #008599"} description={"replace name and password with your wifi network name and password."} />
-                        <CodeBlock step={2} title={"Add forever block from control"} code={"start :: #008599 hat \n set wifi [name] and [password] :: #008599 \n forever"} description={""} />
-                        <CodeBlock step={3} title={"Add send to dashboard block and read temperature block"} code={"start :: #008599 hat \n set wifi [name] and [password] :: #008599 \n forever \n send to dashboard :[] as [temperature1] :: #008599 \n  \n  \n start :: #008599 hat \n set wifi [name] and [password] :: #008599 \n forever \n send to dashboard : (get temperature from [red v] socket :: #008599)  as [temperature1] :: #008599"} description={"add description here."} />
+                        <CodeBlock step={2} title={"Add forever block from control"} code={"start :: #008599 hat \n set wifi [name] and [password] :: #008599 \n forever"} description={"As you want to run your logins as long as the device runs, drag 'forever' block under Controls menu to after wifi config."} />
+                        <CodeBlock step={3} title={"Add send to dashboard block and read temperature block"} code={"start :: #008599 hat \n set wifi [name] and [password] :: #008599 \n forever \n send to dashboard :[] as [temperature1] :: #008599 \n  \n  \n start :: #008599 hat \n set wifi [name] and [password] :: #008599 \n forever \n send to dashboard : (get temperature from [red v] socket :: #008599)  as [temperature1] :: #008599"} description={"Lets send temperature dat to dashboard. First drag and drop 'send to dashboard' block inside forever block. Then drag and drop 'get temperature form' block in to 'send to dashboard' block."} />
                         <CodeBlock step={4} title={"Add new sprites"} image={"images/tutorial/quickstart/select_widget.png"} description={"select \"new sprite\" button under main stage to add a widget."} />
                         <CodeBlock step={5} title={"Configure the widget"} code={"configure widget :: #F77B00 hat \n set name [room temperature] :: #F77B00 \n send [temperature1] data to widget :: #F77B00  \n "} description={"now configure the widget name and what data need to show in it. here we set it to show \"temp\" data."} />
 
@@ -107,11 +107,12 @@ class QuickStart extends React.Component {
                         <p>its time to connect your gadgets. <code>wireme</code> comes with a main controller unit which we call <b>nemesis</b> and other sensor / actuator modules.</p>
                         <p>follow below instructions to connect and program it.</p>
 
-                        <CodeBlock step={1} title={"Connect the WireMe Nemesis to computer via USB"} image="http://placehold.it/350x200" description="add some" />
-                        <CodeBlock step={2} title={"Connect the gadgets according to color labels"} image="http://placehold.it/350x200" description="add some" />
-                        <CodeBlock step={3} title={"Turn on the WireMe Nemesis"} image="http://placehold.it/350x200" description="add some" />
-                        <CodeBlock step={4} title={"select correct serial port in IOT hub"} image="images/tutorial/quickstart/comport.png" description="select connect -> serial port -> COM X. now you will be able to see the red circle inside wireme block turns green." />
-                        <CodeBlock step={5} title={"upload the program"} image="images/tutorial/quickstart/upload.png" description="verify your program is correct. then click 'upload' button in code pane. this will upload your program to 'nemesis' and post your widgets to our dashboard." />
+                        <CodeBlock step={1} title={"Connect the WireMe Nemesis to computer via USB"} image="images/tutorial/quickstart/usb_plugin.jpg" description="Connect the USB cable to your PC and other side to Nemesis." />
+                        <CodeBlock step={2} title={"Connect the gadgets according to color labels"} image="images/tutorial/quickstart/gadget_plugin.jpg" description="Now plugin 'Helios' temperature sensor to Nemesis. When connection make sure colors on the gadget matches the port color on Nemesis." />
+                        <CodeBlock step={3} title={"select correct serial port in IOT hub"} image="images/tutorial/quickstart/comport.png" description="select connect -> serial port -> COM X. now you will be able to see the red circle inside wireme block turns green." />
+                        <CodeBlock step={4} title={"upload the program"} image="images/tutorial/quickstart/upload.png" description="verify your program is correct. then click 'upload' button in code pane. this will upload your program to 'nemesis' and post your widgets to our dashboard." />
+                        <CodeBlock step={5} title={"Turn on the WireMe Nemesis"} image="images/tutorial/quickstart/switch_on_nemesis.jpg" description="After you have uploaded your program, now power on the Nemesis with sliding switch on top. Now your plugged-in modules wll power up." />
+
                     </TutorialSection>
 
                     <TutorialSection title={tutorialSections[4].title} id={tutorialSections[4].id}>
@@ -119,6 +120,9 @@ class QuickStart extends React.Component {
                         <Button icon="home" label='dashboard' href="/dashboard" target='_blank' raised />
                         <p></p>
                         <img className="img-responsive" src="images/tutorial/quickstart/dashboard.png" alt=""/>
+                        <img className="img-responsive" src="images/tutorial/quickstart/dashboard_on_tab.jpg" alt=""/>
+                        <p>you can access the <b>dashboard</b> on mobile devices too.</p>
+
                     </TutorialSection>
 
                 </Tutorial>
