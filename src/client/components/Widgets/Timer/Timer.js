@@ -77,13 +77,35 @@ class Timer extends React.Component {
         this.setState({inputTarget: event.target.value});
     }
 
+/*    shouldComponentUpdate(nextProps, nextState){
+        console.log('target: ' +nextState.target);
+        console.log('next value: ' +nextState.value);
+        console.log('old value: ' +this.state.value);
+        if(nextState.value !== this.state.value){
+            this.setState({started: true});
+        }
+
+        return true;
+
+    }*/
+
+
     componentDidMount(){
 
-        MainEmitter.on(this.props.mqttTopic, (payload) => {
+        // add "_pub"
+        MainEmitter.on(this.props.mqttTopic+'_pub', (payload) => {
             // update the state value
             // payload should be in type {value: int}
             if(payload.current) {
                 this.setState({value: payload.current});
+
+                if(payload.current == payload.target){
+                    this.setState({started: false});
+                }
+                else{
+                    this.setState({started: true});
+
+                }
             }
             else {
                 this.setState({value: 0});
@@ -96,6 +118,11 @@ class Timer extends React.Component {
             }
 
         })
+    }
+
+    secondsToMinutes(seconds){
+        const mins= Math.floor(seconds/60);
+        return mins+':'+  ("0"+(seconds - mins* 60)).slice(-2);
     }
 
     render() {
@@ -112,7 +139,7 @@ class Timer extends React.Component {
                                 </div>
                                 :
                                 <div>
-                                    <div className={style.timerText}>{this.state.value+":00"}</div>
+                                    <div className={style.timerText}>{this.secondsToMinutes(this.state.target - this.state.value)}</div>
                                     <button className="btn btn-danger btn-sm" onClick={this.handleStop}>OFF</button>
                                 </div>
 

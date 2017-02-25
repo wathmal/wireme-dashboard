@@ -45,7 +45,13 @@ class Dashboard extends React.Component{
                     // generate MQTT subscriber array
                     let topicArray = [RM.getUsername() +'/alive'];
                     for (let n in this.state.widgets) {
-                        topicArray.push(RM.getUsername() + '/' + this.state.widgets[n].topic);
+                        // append "_pub" to topic, if its a timer
+                        if(this.state.widgets[n].type == 'timer'){
+                            topicArray.push(RM.getUsername() + '/' + this.state.widgets[n].topic+'_pub');
+                        }
+                        else {
+                            topicArray.push(RM.getUsername() + '/' + this.state.widgets[n].topic);
+                        }
                     }
 
                     // subscribe to all topics
