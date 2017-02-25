@@ -18,15 +18,15 @@ import style from './Profile.scss';
 
 class Profile extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.onClickUpdate = this.onClickUpdate.bind(this);
         this.clearFields = this.clearFields.bind(this);
         this.showForm = this.showForm.bind(this);
         this.state = {
-            name: RM.getName(),
-            username: RM.getUsername(),
+            name: "",
+            username: "",
             old_pwd: '',
             pwd: '',
             conf_pwd: '',
@@ -44,6 +44,18 @@ class Profile extends React.Component {
             widgets: RM.getWidgets()
         }
 
+    }
+
+    componentDidMount(){
+        AuthService.checkIfLoggedIn().then(r =>{
+            console.log("user logged in ");
+            this.setState({name: RM.getName(), username: RM.getUsername()});
+
+        }, e=>{
+            // not logged in or token not verified
+            console.log("not logged in ");
+            AuthService.logout(false);
+        });
     }
 
     handleChange = (name, value) => {

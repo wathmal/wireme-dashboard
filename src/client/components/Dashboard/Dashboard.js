@@ -66,6 +66,7 @@ class Dashboard extends React.Component{
 
         }, e=>{
             // not logged in or token not verified
+            console.log("not logged in ");
             AuthService.logout(false);
         });
 
