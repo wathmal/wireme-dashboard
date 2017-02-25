@@ -37,8 +37,11 @@ class Header extends React.Component {
                 <AppBar className={style.headerSection} leftIcon='home' title={this.props.title}
                         onLeftIconClick={()=>{window.location = '/';}} >
                     <Navigation type="horizontal">
-                        <Button href='/dashboard' flat
-                                style={{color: 'white',textDecoration: 'none'}}>dashboard</Button>
+                        {(RM.getUser()) ?
+                            <Button href='/dashboard' flat
+                                    style={{color: 'white',textDecoration: 'none'}}>dashboard</Button>
+                            : null
+                        }
                         <Button href='/quickstart' flat style={{color: 'white',textDecoration: 'none'}}>quick
                             start</Button>
 

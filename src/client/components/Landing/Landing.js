@@ -76,7 +76,7 @@ class Landing extends React.Component {
 
                                 <div className={style.textSlider}>
                                     <h1 className={style.heading}>A ridiculously easy IOT platform</h1>
-                                    <h4 className={style.subtext}><code>with zero coding</code></h4>
+                                    <h4 className={style.subtext}><code>&#60;&#47;with zero coding&#62;</code></h4>
                                 </div>
 
                             </div>
