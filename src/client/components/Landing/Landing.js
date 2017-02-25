@@ -65,7 +65,7 @@ class Landing extends React.Component {
 
                                 <div className={style.textSlider}>
                                     <h1 className={style.heading}>A ridiculously easy IOT platform</h1>
-                                    <h4 className={style.subtext}><code>&#60;&#47;with zero coding&#62;</code></h4>
+                                    <h4 className={style.subtext}><code>&#60; with zero coding &#62;</code></h4>
                                 </div>
 
                             </div>
@@ -82,13 +82,7 @@ class Landing extends React.Component {
                         <div className="row">
 
                             <div className="col-md-6 col-md-offset-3" style={{paddingTop: 10}}>
-                                <Slider autoplay={true} dots={true} autoplaySpeed={10000}>
-                                    <div>
-                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
-                                    </div>
-                                    <div>
-                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
-                                    </div>
+                                <Slider autoplay={true} dots={true} arrows={false} autoplaySpeed={10000}>
                                     <div>
                                         <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
                                     </div>
