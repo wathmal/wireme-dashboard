@@ -40,7 +40,7 @@ class Landing extends React.Component {
                             <div className="col-md-6">
                                 <img className="img-responsive" style={{width: 100, padding: 10}} src="/images/wireme-text-logo.png" alt=""/>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 hidden-sm hidden-xs">
                                 <ul className={style.landingNav}>
                                     {(RM.getUsername()) ?
                                         <li><Button href='/dashboard' flat style={linkButton}>dashboard</Button></li>

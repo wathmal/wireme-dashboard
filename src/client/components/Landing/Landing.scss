@@ -9,6 +9,16 @@
     text-transform: uppercase;
   }
 
+  @media only screen and (max-width : 480px) {
+    .heading{
+      font-size: 2em;
+    }
+
+    .subtext{
+      font-size: 1em;
+    }
+  }
+
 }
 
 
