@@ -8,15 +8,16 @@ import Navigation from 'react-toolbox/lib/navigation';
 import {IconMenu, MenuItem } from 'react-toolbox/lib/menu';
 import Link from 'react-toolbox/lib/link';
 import {Button} from 'react-toolbox/lib/button';
+import style from './Header.scss';
 
 
 import RM from './../../services/ResourceManager';
 import AuthService from './../../services/AuthService';
 
 
-class Header extends React.Component{
+class Header extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
     }
 
@@ -24,25 +25,36 @@ class Header extends React.Component{
         title: React.PropTypes.string.isRequired
     };
 
-    componentDidMount(){
-        document.title= "wireme - "+this.props.title;
+    componentDidMount() {
+        document.title = "wireme - " + this.props.title;
 
     }
-    render(){
 
-        return(
-            <div>
-                <AppBar leftIcon='home' title={"wireme / "+ this.props.title} onLeftIconClick={()=>{window.location = '/dashboard';}}>
+    render() {
+
+        return (
+            <div style={{backgroundColor:'#0097A7'}}>
+                <AppBar className={style.headerSection} leftIcon='home' title={this.props.title}
+                        onLeftIconClick={()=>{window.location = '/';}} >
                     <Navigation type="horizontal">
-                        <Button icon='star' label='quick start' raised onClick={()=>{window.location = '/quickstart';}} className='hidden-xs'/>
+                        <Button href='/dashboard' flat
+                                style={{color: 'white',textDecoration: 'none'}}>dashboard</Button>
+                        <Button href='/quickstart' flat style={{color: 'white',textDecoration: 'none'}}>quick
+                            start</Button>
 
-                        {(RM.getUser())?
-                                <Link href='profile' label={RM.getUsername()} icon='person' style={{ textDecoration: 'none', color: "white" }} />
+                        {(RM.getUser()) ?
+                            <Button href='/profile' icon='person' flat
+                                    style={{textDecoration: 'none',color: 'white'}}>{RM.getUsername()}</Button>
                             : null
                         }
-                        {(RM.getUser())?
+                        {(RM.getUser()) ? null
+                            : <Button href='/login' flat
+                                      style={{textDecoration: 'none',color: 'white'}}>login</Button>
+                        }
+                        {(RM.getUser()) ?
                             <IconMenu icon='more' position='topRight' menuRipple style={{marginRight: '-1.25rem'}}>
-                                <MenuItem value='logout' onClick={()=> AuthService.logout(true)} icon='exit_to_app' caption='logout' />
+                                <MenuItem value='logout' onClick={()=> AuthService.logout(true)} icon='exit_to_app'
+                                          caption='logout'/>
                             </IconMenu>
                             : null
                         }

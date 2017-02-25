@@ -59,7 +59,7 @@ class Login extends React.Component {
                             </section>
                         </CardText>
                         <CardActions style={{marginLeft: 'auto', marginRight:'auto'}}>
-                            <Button icon="lock_open" label='login' raised primary onClick={this.onClickLogin} />
+                            <Button icon="lock_open" label='login' raised onClick={this.onClickLogin} style={{backgroundColor: '#0d7c82', color:'#ffffff'}} />
                         </CardActions>
                         <CardText style={{marginLeft: 'auto', marginRight:'auto', textTransform: 'uppercase'}}>new to <b>wireme?</b> <a href='register'><b>register</b></a></CardText>
                     </Card>
