@@ -14,6 +14,7 @@ import style from './Header.scss';
 import RM from './../../services/ResourceManager';
 import AuthService from './../../services/AuthService';
 
+const linkButton= {color: 'white',textDecoration: 'none'};
 
 class Header extends React.Component {
 
@@ -33,23 +34,21 @@ class Header extends React.Component {
     render() {
 
         return (
-            <div style={{backgroundColor:'#0097A7'}}>
+            <div style={{backgroundColor: '#0097A7'}}>
                 <AppBar className={style.headerSection} leftIcon='home' title={this.props.title}
                         onLeftIconClick={()=>{window.location = '/';}} >
                     <Navigation type="horizontal">
-                        <Button href='/dashboard' flat
-                                style={{color: 'white',textDecoration: 'none'}}>dashboard</Button>
-                        <Button href='/quickstart' flat style={{color: 'white',textDecoration: 'none'}}>quick
-                            start</Button>
+                        <Button href='/dashboard' flat style={linkButton}>dashboard</Button>
+                        <Button href='/quickstart' flat style={linkButton}>quick start</Button>
 
                         {(RM.getUser()) ?
                             <Button href='/profile' icon='person' flat
-                                    style={{textDecoration: 'none',color: 'white'}}>{RM.getUsername()}</Button>
+                                    style={linkButton}>{RM.getUsername()}</Button>
                             : null
                         }
                         {(RM.getUser()) ? null
                             : <Button href='/login' flat
-                                      style={{textDecoration: 'none',color: 'white'}}>login</Button>
+                                      style={linkButton}>login</Button>
                         }
                         {(RM.getUser()) ?
                             <IconMenu icon='more' position='topRight' menuRipple style={{marginRight: '-1.25rem'}}>
