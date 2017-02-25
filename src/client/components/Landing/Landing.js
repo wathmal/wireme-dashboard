@@ -105,23 +105,20 @@ class Landing extends React.Component {
                         <div style={{paddingTop: 20}}>
                             <div className="row">
                                 <div className="col-md-4">
-                                    <a href="images/landing/vptool-mac.png">
-                                        <img className="img-responsive" src="images/landing/vptool-mac.png" alt=""/>
-                                    </a>
+                                    <h4 className="font-norwester text-center">IOT HUB</h4>
+                                    <img className="img-responsive" src="images/landing/vptool-mac.png" alt=""/>
                                     <br/>
                                     <div><code>scratch</code> based interactive visual programming tool</div>
                                 </div>
                                 <div className="col-md-4">
-                                    <a href="https://placehold.it/1366x862">
-                                        <img className="img-responsive" src="https://placehold.it/1366x862" alt=""/>
-                                    </a>
+                                    <h4 className="font-norwester text-center">NEMESIS</h4>
+                                    <img className="img-responsive" src="images/landing/nemesis.jpg" alt=""/>
                                     <br/>
                                     <div>easily deployable gadget kit with a centralized control unit</div>
                                 </div>
                                 <div className="col-md-4">
-                                    <a href="images/landing/dashboard-mac.png">
-                                        <img className="img-responsive" src="images/landing/dashboard-mac.png" alt=""/>
-                                    </a>
+                                    <h4 className="font-norwester text-center">DASHBOARD</h4>
+                                    <img className="img-responsive" src="images/landing/dashboard-mac.png" alt=""/>
                                     <br/>
                                     <div>web based dashboard to control it from anywhere</div>
                                 </div>
