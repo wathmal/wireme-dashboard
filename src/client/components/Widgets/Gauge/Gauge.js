@@ -40,7 +40,7 @@ class Gauge extends React.Component{
     render(){
         return(
             <div>
-                <C3Chart data={{ json: [this.state.value], type: 'gauge', colors: [this.props.color] }} size={{height: 200}} gauge={{min:0, max:50, label:{format: (value, ratio)=>{return value;}}}} />
+                <C3Chart data={{ json: [this.state.value], type: 'gauge', colors: [this.props.color] }} size={{height: 200}} gauge={{min:0, max:100, label:{format: (value, ratio)=>{return value;}}}} />
             </div>
         )
     }
