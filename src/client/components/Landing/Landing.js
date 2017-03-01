@@ -6,6 +6,8 @@ import React, {PropTypes} from 'react';
 import style from './Landing.scss';
 import {Button} from 'react-toolbox/lib/button';
 import RM from './../../services/ResourceManager';
+import DocumentMeta from 'react-document-meta';
+
 
 import Slider from 'react-slick';
 import SliderStyle from 'slick-carousel'
@@ -30,10 +32,23 @@ class Landing extends React.Component {
     }
 
     render() {
-        
+
+        const meta = {
+            title: 'wireme iot platform',
+            description: 'wireme iot platform, build your own iot system with zero coding on your own.',
+            canonical: 'http://wireme.projects.mrt.ac.lk',
+            meta: {
+                charset: 'utf-8',
+                name: {
+                    keywords: 'wireme,iot,no coding,scratch'
+                }
+            }
+        };
 
         return (
             <div >
+                <DocumentMeta {...meta} />
+
                 <div className={style.landingSection}>
                     <div className="container">
                         <div className="row">
