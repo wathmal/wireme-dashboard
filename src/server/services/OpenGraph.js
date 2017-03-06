@@ -19,11 +19,15 @@ class OpenGraph{
             if (og.hasOwnProperty(key)) {
                 //console.log(key + " -> " + p[key]);
                 //    <meta property="og:title" content="wireme iot platform" />
-                html += `<meta property="og:${key}" content="${og[key]}"> \n`;
+                html += `<meta property="og:${key}" content="${og[key]}"> \n\t`;
             }
         }
 
         return html;
+    }
+
+    setKeywords(keywords){
+        
     }
 }
 

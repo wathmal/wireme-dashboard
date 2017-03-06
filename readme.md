@@ -18,6 +18,18 @@ run `webpack` command in another terminal in order to watch for changes.
 
 visit `http://localhost:3000`.
 
+### meta tags
+**server side rendering** is not fully implemented yet (see **SSR** branch). so till then meta tags are handles by `server.js`
+after defining a new route, add `meta` tags in `server.js`.
+```js
+switch (reqPath) {
+    ...
+    case '/quickstart':
+        og= new OG("wireme - quick start", "http://wireme.projects.mrt.ac.lk/images/tutorial/quickstart/dashboard_on_tab.jpg", "quick start guide for wireme IoT platform");
+        metaHTML = og.generateMeta();
+        break;
+}
+```
 
 mqtt details:
 ```
