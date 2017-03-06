@@ -19,8 +19,8 @@ run `webpack` command in another terminal in order to watch for changes.
 visit `http://localhost:3000`.
 
 ### meta tags
-**server side rendering** is not fully implemented yet (see **SSR** branch). so till then meta tags are handles by `server.js`
-after defining a new route, add `meta` tags in `server.js`.
+**server side rendering** is not fully implemented yet (see **SSR** branch). so till then meta tags are handled by `server.js`
+after defining a new route in react router, add `meta` tags as follows in `server.js`.
 ```js
 switch (reqPath) {
     ...
