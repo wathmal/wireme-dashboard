@@ -31,19 +31,20 @@ app.get('*', function response(req, res) {
 
     const reqPath = req.path;
     let metaHTML="";
+    let og;
     switch (reqPath) {
         case '/':
 
-            let og= new OG("wireme iot platform", "http://wireme.projects.mrt.ac.lk/images/landing/nemesis.jpg", "a RIDICULOUSLY easy IoT platform with zero coding");
+            og= new OG("wireme iot platform", "http://wireme.projects.mrt.ac.lk/images/landing/nemesis.jpg", "a RIDICULOUSLY easy IoT platform with zero coding");
             metaHTML = og.generateMeta();
             break;
         case '/dashboard':
-            let og= new OG("wireme - dashboard", "http://wireme.projects.mrt.ac.lk/images/landing/dashboard-mac.png", "monitor, control your wireme gadgets from anywhere in the world");
+            og= new OG("wireme - dashboard", "http://wireme.projects.mrt.ac.lk/images/landing/dashboard-mac.png", "monitor, control your wireme gadgets from anywhere in the world");
             metaHTML = og.generateMeta();
             break;
 
         case '/quickstart':
-            let og= new OG("wireme - quick start", "http://wireme.projects.mrt.ac.lk/images/tutorial/quickstart/dashboard_on_tab.jpg", "quick start guide for wireme IoT platform");
+            og= new OG("wireme - quick start", "http://wireme.projects.mrt.ac.lk/images/tutorial/quickstart/dashboard_on_tab.jpg", "quick start guide for wireme IoT platform");
             metaHTML = og.generateMeta();
             break;
     }
