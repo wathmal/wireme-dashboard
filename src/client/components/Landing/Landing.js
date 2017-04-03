@@ -7,8 +7,6 @@ import style from './Landing.scss';
 import {Button} from 'react-toolbox/lib/button';
 import RM from './../../services/ResourceManager';
 
-import Slider from 'react-slick';
-import SliderStyle from 'slick-carousel'
 
 const linkButton= {color: 'white',textDecoration: 'none'};
 
@@ -179,9 +177,9 @@ class Landing extends React.Component {
 
                                 <div className="col-md-6 text-center" style={{paddingTop: 40}}>
                                     <div>
-                                        <a href="https://www.facebook.com/team.wireme/" className={style.link} style={{backgroundColor: '#3B5998', color: 'white'}} target="_parent"><span className="fa fa-facebook" /></a>
+                                        <a href="https://www.facebook.com/team.wireme/" className={style.link} style={{backgroundColor: '#3B5998', color: 'white'}} target="_blank"><span className="fa fa-facebook" /></a>
                                         <a href="#" className={style.link} style={{backgroundColor: '#00ACEE', color: 'white'}} target="_parent"><span className="fa fa-twitter" /></a>
-                                        <a href="https://www.youtube.com/channel/UCF58jQImjIfgwBwHOImhJqw" className={style.link} style={{backgroundColor: '#b31217', color: 'white'}} target="_parent"><span className="fa fa-youtube" /></a>
+                                        <a href="https://www.youtube.com/channel/UCF58jQImjIfgwBwHOImhJqw" className={style.link} style={{backgroundColor: '#b31217', color: 'white'}} target="_blank"><span className="fa fa-youtube" /></a>
                                     </div>
                                 </div>
 
