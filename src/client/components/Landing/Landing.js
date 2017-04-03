@@ -16,7 +16,12 @@ class Landing extends React.Component {
 
     constructor() {
         super();
+        this.sendMessage= this.sendMessage.bind(this);
+
         this.state = {
+            email: '',
+            name: '',
+            message: ''
         }
     }
 
@@ -25,8 +30,30 @@ class Landing extends React.Component {
 //<img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
     };
 
+    handleChange = (name, e) => {
+        let temp={};
+        temp[name]= e.target.value;
+        this.setState(temp);
+    };
+
     componentDidMount(){
 
+    }
+    
+    sendMessage(){
+        $.ajax({
+            method: 'POST',
+            url: '/api/sendemail',
+            data: JSON.stringify(this.state),
+            dataType: 'json',
+            contentType: "application/json",
+            success: (data) => {
+                alert('thank you for contacting us. a member from our team will replay u shortly.')
+            },
+            error: (xhr, status, err) => {
+                alert('oopz, we have some error.')
+            }
+        });
     }
 
     render() {
@@ -81,14 +108,10 @@ class Landing extends React.Component {
                         <div className="row">
 
                             <div className="col-md-6 col-md-offset-3" style={{paddingTop: 10}}>
-                                <Slider autoplay={true} dots={true} arrows={false} autoplaySpeed={10000}>
-                                    <div>
-                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
-                                    </div>
-                                    <div>
-                                        <img className="img-responsive" src="images/landing/vptool-macbook.png" alt=""/>
-                                    </div>
-                                </Slider>
+                                <div className="embed-responsive embed-responsive-16by9">
+                                    <iframe className="embed-responsive-item" src="https://www.youtube.com/embed/-T88A6U8xs0" frameBorder="0" allowFullScreen />
+                                </div>
+
                             </div>
 
                         </div>
@@ -136,18 +159,18 @@ class Landing extends React.Component {
                                 <div className="col-md-6">
                                     <form>
                                         <div className="form-group">
-                                            <input className="form-control input-lg" name="name" type="text" placeholder="name" />
+                                            <input className="form-control input-lg" name="name" type="text" placeholder="name" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} />
                                         </div>
                                         <div className="form-group">
-                                            <input className="form-control input-lg" name="email" type="text" placeholder="email" />
+                                            <input className="form-control input-lg" name="email" type="text" placeholder="email" value={this.state.email} onChange={this.handleChange.bind(this, 'email')}/>
                                         </div>
                                         <div className="form-group">
-                                            <textarea className="form-control input-lg" name="message" rows="3" placeholder="your message" />
+                                            <textarea className="form-control input-lg" name="message" rows="3" placeholder="your message" value={this.state.message} onChange={this.handleChange.bind(this, 'message')} />
 
                                         </div>
                                         <div style={{textAlign: 'center'}}>
 
-                                            <Button raised>send a message</Button>
+                                            <Button raised onClick={this.sendMessage}>send a message</Button>
                                         </div>
 
                                     </form>

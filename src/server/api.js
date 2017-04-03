@@ -6,6 +6,7 @@ import express from 'express';
 import JWT from 'jsonwebtoken';
 import config from './config';
 import DBService from './services/DBService';
+var sg = require('sendgrid')(config.sendgridApiKey);
 
 const apiRouter = express.Router();
 
@@ -61,6 +62,52 @@ apiRouter.post('/register', (req, res)=>{
     else{
         res.status(400).json({message: 'bad input'});
     }
+});
+
+/*
+* send emails to our team when someone contacts through "contact-us" section
+*
+* */
+apiRouter.post('/sendemail', (req, res) => {
+    const toAddr= req.body.email;
+    const name= req.body.name;
+    const message= req.body.message;
+
+    let request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: {
+            personalizations: [
+                {
+                    to: [
+                        {email: 'wathmal.12@cse.mrt.ac.lk'},
+                        {email: 'dulaj.rajitha.12@cse.mrt.ac.lk'},
+                        {email: 'hamlakshan.12@cse.mrt.ac.lk'},
+                        {email: 'harshasandamal.12@cse.mrt.ac.lk'},
+                    ],
+                    subject: '[wireme] message from '+ name,
+                },
+            ],
+            from: {
+                email: toAddr,
+            },
+            content: [
+                {
+                    type: 'text/plain',
+                    value: message,
+                },
+            ],
+        },
+    });
+
+    sg.API(request)
+        .then(response => {
+            res.status(201).json({message: 'email/s sent'});
+        })
+        .catch(error => {
+            res.status(500).json({message: 'error'});
+        });
+
 });
 
 // validate jwt

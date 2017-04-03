@@ -12,4 +12,5 @@ export default {
         database: 'wireme'
     },
     saltRounds: 10,
+    sendgridApiKey: "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"
 }
